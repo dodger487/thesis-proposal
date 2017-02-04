@@ -1,0 +1,212 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{times}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+% <http://psl.cs.columbia.edu/phdczar/proposal.html>:
+%
+% The standard departmental thesis proposal format is the following:
+%        30 pages
+%        12 point type
+%        1 inch margins all around = 6.5   inch column
+%        (Total:  30 * 6.5   = 195 page-inches)
+%
+% For letter-size paper: 8.5 in x 11 in
+% Latex Origin is 1''/1'', so measurements are relative to this.
+
+\topmargin      0.0in
+\headheight     0.0in
+\headsep        0.0in
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\textheight     9.0in
+\textwidth      6.5in
+
+% \title{{\bf Doctoral Thesis Proposal} \\
+% \it Thesis proposal}
+\title{{\bf Big Location Data: Balancing Profits, Promise, and Perils} \\
+\it Research Document}
+\author{ {\bf Chris Riederer}  \\
+Department of Computer Science \\
+Columbia University\\
+{\small mani@cs.columbia.edu}
+}
+\date{\today}
+
+\begin{document}
+\pagestyle{plain}
+\pagenumbering{roman}
+\maketitle
+
+\pagebreak
+\begin{abstract}
+
+Ubiquitous, mobile computing in the form of smartphones has created data that lets us study human behavior like never before.
+In particular, data about human mobility has allowed us to understand the hows and whys of human movement.
+However, due to difficulty in obtaining labels, little work has been done to understand the impact and importance of demographics on human mobility.
+In this thesis, we close this gap by pairing machine learning with large scale public social media data to label data and obtain new analyses of the impact of demographics on mobility.
+
+
+\end{abstract}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+\section{Introduction}
+\label{ch:intro}
+
+This part provides an overall introduction of your work, including
+related work of your proposal.
+
+Ideas:
+\begin{enumerate}
+\item Real time polling: cheap, reliable, mostly accurate
+\item Segregation
+\item Bias
+\item Fairness
+\item Demographic inference from mobility
+\item Semantics of locations
+\item Location + Social Networks
+\item Privacy
+\item Uniqueness
+\item Linking
+\item Next place prediction
+\item Inference and difficulties 
+\end{enumerate}
+
+Trying to cluster these...
+* Bias correction in polling
+* Human mobility and its uses...
+* Demographics
+* Fairness
+
+
+\subsection{Related work}
+\label{ch:related}
+
+This part talks about related work of your proposal.
+
+\section{Location Data, Privacy, and Economics}
+\label{sec:econ}
+
+Your Browsing Behavior for a Big Mac (maybe?)
+For Sale: Your Data. By: You (some portion?)
+Challenges of Keyword-Based Location Disclosure
+
+
+
+\section{Location Data and Anonymity}
+\label{sec:anon}
+Linking Users Across Domains with Location Data
+FindYou
+
+
+
+\section{Location Data, Demographics, and Bias}
+\label{sec:bias}
+
+I Don’t Have a Photograph But You Can Have My Footprints
+Under submission work on demographic labeling
+Current work on bias!
+
+
+
+\section{Proposal Topic I}
+\label{ch:proposal}
+The first part of my thesis will be to obtain a demographic understanding of human mobility.
+In order to study demographic mobility, I must first obtain a dataset linking a user's demographics to their movements.
+I plan to do this by relying on the social network Instagram.
+
+Instagram is a popular image-sharing social network, owned by Facebook.
+According to their press page \footnote{\url{https://www.instagram.com/press/?hl=en}}, at the time of writing (April 2016), Instagram has over 400 million monthly active users, 75\% of which are located outside the United States.
+Over 40 billion photos are shared on the site and 80 million photos are uploaded a day.
+Instagram first launched on smartphones, and as of writing there is no way to upload photos other than using a smartphone, making it very mobile-centric.
+
+Instagram is invaluable for understanding demographic mobility for the following reasons.
+First, Instagram is rich in location data.
+Many users attach geographic information to their Instagram pictures, provided a sampled, active view of a their geographic location data.
+Some of these photos are also tagged with semantic location data.
+TODO: GIVE REAL NUMBERS
+
+Second, Instagram's photos can hold the key to demographics.
+Recent advances in facial recognition have made it extremely easy and efficient to find faces in an image, and label the faces with age, race, and gender.
+It is therefore possible to label each public Instagram image with genders, ages, and races.
+By aggregating this information within a profile with many geotagged photos, we can potentially label the demographics of all of a users movements.
+
+After collecting this data, the next major hurdle will be to understand its representativeness and accuracy.
+To be more specific, we need to understand:
+\begin{enumerate}
+  \item The \textbf{accuracy} of our algorithm labeling a user's age, gender, and race.
+  \item The \textbf{representativeness} of a user's movements within Instagram. 
+  \item The \textbf{demographics} of Instagram users compared to the general population.
+\end{enumerate}
+
+Each of these questions can be answered in the following manner:
+\begin{enumerate}
+  \item \textbf{Accuracy of labels:} We can obtain an idea of accuracy by comparing our algorithm with profiles labeled by humans, either by research assistants or crowd-sourcing systems.
+  \item \textbf{Representativeness of mobility:} There are many works and datasets available on human mobility generated from a variety of behaviors, such as other social media, phone (CDR) data, taxi data, etc. We can compare our results with these other sources to find differences and similarities in mobility.
+  \item \textbf{Understand bias:} we can compare our Instagram results, or results from studies such as the Pew Internet Survey, with those from the U.S. Census or other surveys.
+\end{enumerate}
+
+With an understanding of 
+\begin{itemize}
+  \item Create new metrics about the interactions of different demographics groups, relevant to sociologists.
+  \item Run city planning surveys at fractions the cost of more expensive mail-in surveys.
+  \item Better understand disparate impact of various services on different demographics.
+  \item Use our understanding of demographics to assess the accuracy of algorithms labeling demographics in other contexts (e.g. on Twitter or other social media)
+\end{itemize}
+
+
+% \section{Proposal Topic II}
+% \label{ch:proposal}
+
+% The content of your proposal. Each topic occupies one section, each
+% with their own conclusion and future work.
+
+% \section{Research plan}
+% \label{ch:plan}
+
+% Provide an overview of what you have done and what need to be done.
+
+% \subsection{Plan for completion of the research}
+
+% Table \ref{tab:plan} shows my plan for completion of the research.
+
+% \begin{table}[h]
+% \begin{small}
+% \begin{center}
+% \begin{tabular}{lll}
+% Timeline & Work & Progress\\
+% \hline
+%           & XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX & completed\\
+% Nov. xxxx & XXXXXXXXXXXXXXXXXXXXXXXXXXX & ongoing\\
+% Jan. xxxx & Thesis writting & \\
+% Feb. xxxx & Thesis defense & \\
+% \end{tabular}
+% \end{center}
+% \end{small}
+% \caption{Plan for completion of my research}
+% \label{tab:plan}
+% \end{table}
+
+% Thus, I plan to defend my thesis in XXX XXXX.
+
+\pagebreak
+
+\begin{footnotesize}
+\bibliographystyle{plain}
+% \bibliography{string,itu,rfc,i-d}
+\bibliography{proposal}
+\end{footnotesize}
+
+\end{document}
+
+

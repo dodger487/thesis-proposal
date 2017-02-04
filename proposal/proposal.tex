@@ -1,0 +1,338 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{times}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+% <http://psl.cs.columbia.edu/phdczar/proposal.html>:
+%
+% The standard departmental thesis proposal format is the following:
+%        30 pages
+%        12 point type
+%        1 inch margins all around = 6.5   inch column
+%        (Total:  30 * 6.5   = 195 page-inches)
+%
+% For letter-size paper: 8.5 in x 11 in
+% Latex Origin is 1''/1'', so measurements are relative to this.
+
+\topmargin      0.0in
+\headheight     0.0in
+\headsep        0.0in
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\textheight     9.0in
+\textwidth      6.5in
+
+% \title{{\bf Doctoral Thesis Proposal} \\
+% \it Thesis proposal}
+\title{{\bf Demographic Mobility} \\
+\it Research Document}
+\author{ {\bf Chris Riederer}  \\
+Department of Computer Science \\
+Columbia University\\
+{\small mani@cs.columbia.edu}
+}
+\date{\today}
+
+\begin{document}
+\pagestyle{plain}
+\pagenumbering{roman}
+\maketitle
+
+\pagebreak
+\begin{abstract}
+
+Ubiquitous, mobile computing in the form of smartphones has created data that lets us study human behavior like never before.
+In particular, data about human mobility has allowed us to understand the hows and whys of human movement.
+However, due to difficulty in obtaining labels, little work has been done to understand the impact and importance of demographics on human mobility.
+In this thesis, we close this gap by pairing machine learning with large scale public social media data to label data and obtain new analyses of the impact of demographics on mobility.
+
+
+\end{abstract}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+\section{Introduction}
+\label{ch:intro}
+
+This part provides an overall introduction of your work, including
+related work of your proposal.
+
+Ideas:
+\begin{enumerate}
+\item Real time polling: cheap, reliable, mostly accurate
+\item Segregation
+\item Bias
+\item Fairness
+\item Demographic inference from mobility
+\item Semantics of locations
+\item Location + Social Networks
+\item Privacy
+\item Uniqueness
+\item Linking
+\item Next place prediction
+\item Inference and difficulties 
+\end{enumerate}
+
+Trying to cluster these...
+* Bias correction in polling
+* Human mobility and its uses...
+* Demographics
+* Fairness
+
+
+\subsection{Related work}
+\label{ch:related}
+
+This part talks about related work of your proposal.
+
+\section{Human mobility}
+\label{sec:mobility}
+
+Basics: Unique, social, sensitive, periodic
+
+% How is location data represented?
+Location data can be described in two main ways: geographically or semantically (FIND A better WORD).
+Geographic data can be described by a latitude-longitude data on the globe.
+Semantic location data refers to an identifier commonly used within that dataset.
+This could have some information available to a common user, e.g. ``New York City", or it could simply be an identifier, e.g. 7.
+Semantic location data 
+Note that often these two may be combined or used together.
+A location such as ``CEPSR Office 618, Columbia University" (the author's office) indicates a very small, non-ambiguous location that can easily be mapped to geographic coordinates.
+
+In this work, I will typically assume location data is also tagged with temporal data, and I will use the terms location data and spatiotemporal data interchangeably, except where noted.
+
+
+% How is it captured and represented?
+Location data can be captured passively or actively.
+\textbf{Actively captured} location data is only recorded when the user takes some action.
+Note that this action does not need to inherently be ``about" location data, for example, a user making a call from a cell phone or swiping a credit card is typically not consciously thinking about their location data. 
+A record of their location is created as a by-product of their use of that technology.
+\textbf{Passively captured} is meant in a stronger way-- the user's location is captured without the user making any kind of action.
+This can occur through tracking apps.
+An example is MapMyRun\footnote{\url{http://www.mapmyrun.com/}}, an app where users record their routes while running, in order to track distance and progress in meeting exercise goals.
+Although the user took an action to start recording their location, the location is recorded in the background with no user action from then on, and hence we call it ``passive".
+Another example is Google's location history.
+Google records location data in the background of a users Android phone every few minutes.
+A map of everywhere a user (with an Android phone with location history turned on) is available at \footnote{\url{https://www.google.co.in/maps/timeline}}.
+
+
+This section will contain info about location data.
+What are some features of human mobility?
+Privacy
+Social
+
+
+\section{Demographics}
+\label{sec:demo}
+The word ``demography" comes from the Greek words for ``the people" and ``measurement".
+Thus, demographics is the study of populations of human beings.
+In modern day usage, this typically involves 
+
+Some typical categorizations of demographies are:
+\begin{itemize}
+  \item Race
+  \item Socioeconomic status
+  \item Gender
+  \item Age
+  \item Language
+\end{itemize}
+
+Demographics research is of interest for a variety of reasons.
+
+Computational social science % TODO
+
+Demographics is also deeply important in the world of advertising, the main driver of the online economy.
+Knowing the demographics of a site visitor means having a deeper insight into a reader's needs, desires, and hence their likelihood of purchasing something.
+Newspapers first made their money by providing ``targeted" demographics, showing advertisers the addresses (and hence typically associated demographics) of readers.
+Now, through the use of computational techniques, ads can be targeted at users in much more fine-grained ``buckets", the hope being that more fine-tuning results in higher click-through rates and thus higher revenues.
+% TODO: how much do demographics improve ad revenue?
+
+
+\subsection{Segregation}
+U.S. Census has several exact definitions of housing segregation.
+The United States Census has 
+\begin{itemize}
+  \item Evenness
+  \item Exposure
+  \item Concentration
+  \item Centralization
+  \item Clustering
+\end{itemize}
+\url{https://www.census.gov/hhes/www/housing/resseg/pdf/app_b.pdf}
+
+Recently, academic works have tried to use CDR data to understand segregation.
+% TODO: Discuss work and findings
+\cite{amini2014impact}
+\cite{manduca2015mobile}
+\cite{desu2015untangling}
+\cite{blumenstock2015neighborhood}
+% TODO: http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3633623/
+
+% TODO: make a glossary
+
+\subsection{Inference}
+
+\cite{zhong2015where}
+
+
+
+Differences in use on social networks.
+
+
+
+
+\section{Algorithmic Bias and Fairness}
+\label{sec:fair}
+``Software is eating the world", Mark Andreesen famously said. 
+As more parts of daily life become governed by software, the recommendations and algorithms within such products will have a larger impact on our society.
+Recently, concerns have been raised about algorithmic bias-- the idea that the algorithms underlying our software may place disparate burdens or hardships on specific groups, particularly groups facing histories of discrimination or even legally protected classes.
+Perhaps concerningly, this bias can easily happen unintentionally or accidentally.
+
+\subsection{Evidence of Algorithmic Bias}
+Evidence or instances of algorithmic bias have been reported in the popular press.
+In 2012, the Wall Street Journal discovered that Staples was varying prices on their website, such that customers nearer to a competitor saw lower prices\footnote{\url{http://www.wsj.com/articles/SB10001424127887323777204578189391813881534}}.
+As customers in wealthier areas were more likely to be near a competitor, this had the effect of raising prices for lower income users.
+Prices are an extreme example, but bias can also extend to rankings or availability of products.
+More recently, Bloomberg reported on racial disparities in the ZIP codes where Amazon Prime Same Day delivery is available\footnote{\url{http://www.bloomberg.com/graphics/2016-amazon-same-day/}}.
+Reporters from the Washington Post showed that Uber wait times were longer in areas with higher concentrations of minorities \footnote{\url{https://www.washingtonpost.com/news/wonk/wp/2016/03/10/uber-seems-to-offer-better-service-in-areas-with-more-white-people-that-raises-some-tough-questions/}, \url{http://www.nickdiakopoulos.com/projects/algorithmic-accountability-reporting/}}.
+% FiveThirtyEight reported on how Uber was created many more rides in the traditionally underserved outer boroughs of New York City\footnote{\url{https://fivethirtyeight.com/features/uber-is-serving-new-yorks-outer-boroughs-more-than-taxis-are/}}.
+
+% \url{http://www.cjr.org/innovations/investigating_algorithms.php}
+
+
+Beyond the popular press, this topic has been studied in the academic community.
+% TODO: Solon's paper
+In~\cite{Anonymous:2012wi}, authors found the same price changes mentioned in the Wall Street Journal article.
+Additionally, they found large price differences based on geographic location on several sites, especially for digital goods.
+Creating various personas (web-browsing histories of affluent or price-sensitive shoppers) led to changes in the ranking of goods on various sites, and prices differed based on the referring site of a user (such as a discount aggregator).
+They found no evidence for system-based (OS or browser) based changes.
+
+Open data has allowed authors to look for bias in the methodology of law enforcement.
+In~\cite{goel2015precinct}, researchers examined the impact of race on the Stop and Frisk policy of the New York Police Department.
+% TODO: read/write more.
+They were able to provide a simple procedure that police officers could take to greatly lower the number of stops unlikely to result in an arrest while keeping the number of illegal guns captured constant.
+
+% Geolocation
+Authors have found some suggestions that companies might take care to not alter results when it comes to controversial topics~\cite{kliman2015location}.
+Here, authors saw that changing the location of a search for controversial terms resulted in fewer alterations to results (including result ordering) than the changes viewed in other categories.
+
+
+\subsection{Tools for Detecting and Correcting Algorithmic Bias}
+The works in the previous section either (1) only looked at specific instances of bias or (2) presented tools created for finding \emph{differences} in algorithmic outputs, which might not necessarily be biased.
+Recently, research has also developed to find more general solutions to problems relating to algorithmic bias.
+
+For example, FairTest is a plugin to a popular machine learning library.
+FairTest works by TODO.
+% Many of the works in the previous section focused on finding specific instances of potential bias
+
+TODO
+Sunlight?
+Others?
+
+
+
+\section{Surveying}
+\label{sec:survey}
+
+
+
+\section{Proposal Topic I}
+\label{ch:proposal}
+The first part of my thesis will be to obtain a demographic understanding of human mobility.
+In order to study demographic mobility, I must first obtain a dataset linking a user's demographics to their movements.
+I plan to do this by relying on the social network Instagram.
+
+Instagram is a popular image-sharing social network, owned by Facebook.
+According to their press page \footnote{\url{https://www.instagram.com/press/?hl=en}}, at the time of writing (April 2016), Instagram has over 400 million monthly active users, 75\% of which are located outside the United States.
+Over 40 billion photos are shared on the site and 80 million photos are uploaded a day.
+Instagram first launched on smartphones, and as of writing there is no way to upload photos other than using a smartphone, making it very mobile-centric.
+
+Instagram is invaluable for understanding demographic mobility for the following reasons.
+First, Instagram is rich in location data.
+Many users attach geographic information to their Instagram pictures, provided a sampled, active view of a their geographic location data.
+Some of these photos are also tagged with semantic location data.
+TODO: GIVE REAL NUMBERS
+
+Second, Instagram's photos can hold the key to demographics.
+Recent advances in facial recognition have made it extremely easy and efficient to find faces in an image, and label the faces with age, race, and gender.
+It is therefore possible to label each public Instagram image with genders, ages, and races.
+By aggregating this information within a profile with many geotagged photos, we can potentially label the demographics of all of a users movements.
+
+After collecting this data, the next major hurdle will be to understand its representativeness and accuracy.
+To be more specific, we need to understand:
+\begin{enumerate}
+  \item The \textbf{accuracy} of our algorithm labeling a user's age, gender, and race.
+  \item The \textbf{representativeness} of a user's movements within Instagram. 
+  \item The \textbf{demographics} of Instagram users compared to the general population.
+\end{enumerate}
+
+Each of these questions can be answered in the following manner:
+\begin{enumerate}
+  \item \textbf{Accuracy of labels:} We can obtain an idea of accuracy by comparing our algorithm with profiles labeled by humans, either by research assistants or crowd-sourcing systems.
+  \item \textbf{Representativeness of mobility:} There are many works and datasets available on human mobility generated from a variety of behaviors, such as other social media, phone (CDR) data, taxi data, etc. We can compare our results with these other sources to find differences and similarities in mobility.
+  \item \textbf{Understand bias:} we can compare our Instagram results, or results from studies such as the Pew Internet Survey, with those from the U.S. Census or other surveys.
+\end{enumerate}
+
+With an understanding of 
+\begin{itemize}
+  \item Create new metrics about the interactions of different demographics groups, relevant to sociologists.
+  \item Run city planning surveys at fractions the cost of more expensive mail-in surveys.
+  \item Better understand disparate impact of various services on different demographics.
+  \item Use our understanding of demographics to assess the accuracy of algorithms labeling demographics in other contexts (e.g. on Twitter or other social media)
+\end{itemize}
+
+
+% \section{Proposal Topic II}
+% \label{ch:proposal}
+
+% The content of your proposal. Each topic occupies one section, each
+% with their own conclusion and future work.
+
+% \section{Research plan}
+% \label{ch:plan}
+
+% Provide an overview of what you have done and what need to be done.
+
+% \subsection{Plan for completion of the research}
+
+% Table \ref{tab:plan} shows my plan for completion of the research.
+
+% \begin{table}[h]
+% \begin{small}
+% \begin{center}
+% \begin{tabular}{lll}
+% Timeline & Work & Progress\\
+% \hline
+%           & XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX & completed\\
+% Nov. xxxx & XXXXXXXXXXXXXXXXXXXXXXXXXXX & ongoing\\
+% Jan. xxxx & Thesis writting & \\
+% Feb. xxxx & Thesis defense & \\
+% \end{tabular}
+% \end{center}
+% \end{small}
+% \caption{Plan for completion of my research}
+% \label{tab:plan}
+% \end{table}
+
+% Thus, I plan to defend my thesis in XXX XXXX.
+
+\pagebreak
+
+\begin{footnotesize}
+\bibliographystyle{plain}
+% \bibliography{string,itu,rfc,i-d}
+\bibliography{proposal}
+\end{footnotesize}
+
+\end{document}
+
+
