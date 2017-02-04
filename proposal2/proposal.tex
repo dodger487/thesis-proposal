@@ -28,14 +28,16 @@
 
 % \title{{\bf Doctoral Thesis Proposal} \\
 % \it Thesis proposal}
-\title{{\bf Big Location Data: Balancing Profits, Promise, and Perils} \\
-\it Research Document}
+\title{{\bf Big Location Data: \\ Balancing Profits, Promise, and Perils} \\
+\it Thesis Proposal}
 \author{ {\bf Chris Riederer}  \\
 Department of Computer Science \\
 Columbia University\\
 {\small mani@cs.columbia.edu}
 }
 \date{\today}
+
+\newcommand{\chap}[1]{Chapter~\ref{#1}}
 
 \begin{document}
 \pagestyle{plain}
@@ -47,9 +49,11 @@ Columbia University\\
 
 Ubiquitous, mobile computing in the form of smartphones has created data that lets us study human behavior like never before.
 In particular, data about human mobility has allowed us to understand the hows and whys of human movement.
-However, due to difficulty in obtaining labels, little work has been done to understand the impact and importance of demographics on human mobility.
-In this thesis, we close this gap by pairing machine learning with large scale public social media data to label data and obtain new analyses of the impact of demographics on mobility.
+At the same time, these new collections of data can present societal risks, as we've now enabled mass surveillance, a loss of privacy, and algorithmic bias.
 
+In this thesis proposal, I describe recent work that attempts to balance the scientific and engineering promises of location data with the potential risks.
+I will describe work I have completed relating location data to privacy, anonymity, economics, and algorithmic bias.
+I propose future research to be completed in the form of a thesis, advancing knowledge of location-based demographics and algorithmic bias.
 
 \end{abstract}
 
@@ -63,36 +67,114 @@ In this thesis, we close this gap by pairing machine learning with large scale p
 \section{Introduction}
 \label{ch:intro}
 
-This part provides an overall introduction of your work, including
-related work of your proposal.
+TODO
 
-Ideas:
-\begin{enumerate}
-\item Real time polling: cheap, reliable, mostly accurate
-\item Segregation
-\item Bias
-\item Fairness
-\item Demographic inference from mobility
-\item Semantics of locations
-\item Location + Social Networks
-\item Privacy
-\item Uniqueness
-\item Linking
-\item Next place prediction
-\item Inference and difficulties 
-\end{enumerate}
+I will begin with a background section which introduces the core concepts found in this proposal: location data, privacy, and bias.
+I proceed with three chapters detailing completed work.
+Each chapter contains a section summarizing relevant prior work.
 
-Trying to cluster these...
-* Bias correction in polling
-* Human mobility and its uses...
-* Demographics
-* Fairness
+\chap{sec:econ} focuses on location data, privacy, and economics.
+We begin with work that seeks to understand user attitudes to their privacy and the economic value of their information.
+Specifically, it examines an alternative to the current practice of firms offering free services in exchange for full control over user data.
+The alternative model is one in which users control their data and make decisions about when to sell access to their info, and to whom.
+
+% Linking Users Across Domains with Location Data
+% FindYou
+\chap{sec:anon} examines the possibility of anonymizing location data.
+Prior work has shown that users are highly unique in their location patterns, leaving them vulnerable to deanonymization (see~\ref{ssec:privacy}).
+Here we take this a step further, showing not only that this vulnerability exists, but that users indeed can be linked to other datasets.
+Additionally, we provide a tool to users that aggregates and displays their location data along with the potential inferences made from it.
+
+
+% I Don’t Have a Photograph But You Can Have My Footprints
+% Under submission work on demographic labeling
+% Current work on bias!
+\chap{sec:bias} shows the potential for location data to be part of systems that 
+We gather a dataset of locations attached to demographic information from a popular image-sharing mobile application.
+This data allows us to study the differences in human mobility across different groups, and moreover, to show that demographics can be inferred using only location data.
+This raises questions about the sensitivity of location data, and about the potential for bias in systems that make decisions based on location data.
+We examine other methodologies for inferring demographics from social network data and discuss debiasing of algorithms.
+
+\chap{sec:proposal-i}
+
+\chap{sec:proposal-ii}
+
+I conclude with a plan for completing this work in \chap{sec:plan}.
+
+
+
+
+
+
+
+
+\section{Background}
+\label{sec:background}
+This part talks about related work of your proposal.
+
+\subsection{Location Data}
+\textbf{What is location data?}
+Most generally, location data is information relating people to places.
+Typically, this relation is the fact that a person was at a place.
+Adding time into the figure, the relation could be that a person was at a place at a particular time.
+However, location data could also include relations about the importance of a place in someones life, such as them living in a location, working at a location, or having spent a quantity of time in a location.
+Though location data does not need to be associated with user IDs, in this work we will consider that there is always attached some sort of user ID that unqiuely identifies the user in the dataset, possibly de-personalized.
+
+Location data can be described in two main ways: \textbf{geographically} or \textbf{semantically}.
+\emph{Geographic} data can be described by a latitude-longitude data on the globe.
+\emph{Semantic} location data refers to an identifier used within that dataset.
+This could have some information available to a common user, e.g. ``New York City", or it could simply be an identifier, e.g. 7.
+Note that often these two may be combined or used together.
+A location such as ``CEPSR Office 618, Columbia University" (the author's office) indicates a very small, non-ambiguous location that can easily be mapped to geographic coordinates.
+Semantic location data can sometimes present a privacy problem, as an association with a place could indicate sensitive attributes, such as someone's religion, political affiliation, health, or sexuality.
+In this work, I will typically assume location data is also tagged with temporal data, and I will use the terms location data and spatiotemporal data interchangeably.
+
+To put this more formally, we can define a single data point $p$ of location data to be:
+\[ p = \langle u, l \rangle \]
+or, including time:
+\[ p = \langle u, l, t \rangle \]
+where $u$ uniquely identifies a user, $l$ uniquely identifies a location, and $t$ specifies a time.
+Note that $l$ could be a latitude-longitude pair in the geographic case or an ID in the semantic case.
+
+\textbf{How is location data collected?}
+Location data can be captured passively or actively.
+\textbf{Actively captured} location data is only recorded when the user takes some action.
+Note that this action does not need to inherently be ``about" location data, for example, a user making a call from a cell phone or swiping a credit card is typically not consciously thinking about their location data. 
+A record of their location is created as a by-product of their use of that technology.
+\textbf{Passively captured} is meant in a stronger way-- the user's location is captured without the user making any kind of action.
+This can occur through tracking apps.
+An example is MapMyRun\footnote{\url{http://www.mapmyrun.com/}}, an app where users record their routes while running, in order to track distance and progress in meeting exercise goals.
+Although the user took an action to start recording their location, the location is recorded in the background with no user action from then on, and hence we call it ``passive".
+Another example is Google's location history.
+Google records location data in the background of a users Android phone every few minutes.
+A map of everywhere a user (with an Android phone with location history turned on) is available at \footnote{\url{https://www.google.co.in/maps/timeline}}.
+
+\textbf{What is location used for?}
+TODO
+
+
+
+\subsection{Privacy}
+\label{ssec:privacy}
+Privacy has been an important concept, brought to the forefront of public debate as surveillance of users has grown, both by governments and private companies.
+
+ADD MORE STUFF
+
+In this work, we will focus on two technical conceptions of privacy, \emph{k-anonymity} and \emph{differential privacy}.
+
+\textbf{k-anonymity} 
+
+\textbf{Differential privacy}
+
+
+\subsection{Bias}
+
+\subsection{Online Advertising}
 
 
 \subsection{Related work}
-\label{ch:related}
+\label{sec:related}
 
-This part talks about related work of your proposal.
 
 \section{Location Data, Privacy, and Economics}
 \label{sec:econ}
@@ -120,59 +202,17 @@ Current work on bias!
 
 
 \section{Proposal Topic I}
-\label{ch:proposal}
-The first part of my thesis will be to obtain a demographic understanding of human mobility.
-In order to study demographic mobility, I must first obtain a dataset linking a user's demographics to their movements.
-I plan to do this by relying on the social network Instagram.
-
-Instagram is a popular image-sharing social network, owned by Facebook.
-According to their press page \footnote{\url{https://www.instagram.com/press/?hl=en}}, at the time of writing (April 2016), Instagram has over 400 million monthly active users, 75\% of which are located outside the United States.
-Over 40 billion photos are shared on the site and 80 million photos are uploaded a day.
-Instagram first launched on smartphones, and as of writing there is no way to upload photos other than using a smartphone, making it very mobile-centric.
-
-Instagram is invaluable for understanding demographic mobility for the following reasons.
-First, Instagram is rich in location data.
-Many users attach geographic information to their Instagram pictures, provided a sampled, active view of a their geographic location data.
-Some of these photos are also tagged with semantic location data.
-TODO: GIVE REAL NUMBERS
-
-Second, Instagram's photos can hold the key to demographics.
-Recent advances in facial recognition have made it extremely easy and efficient to find faces in an image, and label the faces with age, race, and gender.
-It is therefore possible to label each public Instagram image with genders, ages, and races.
-By aggregating this information within a profile with many geotagged photos, we can potentially label the demographics of all of a users movements.
-
-After collecting this data, the next major hurdle will be to understand its representativeness and accuracy.
-To be more specific, we need to understand:
-\begin{enumerate}
-  \item The \textbf{accuracy} of our algorithm labeling a user's age, gender, and race.
-  \item The \textbf{representativeness} of a user's movements within Instagram. 
-  \item The \textbf{demographics} of Instagram users compared to the general population.
-\end{enumerate}
-
-Each of these questions can be answered in the following manner:
-\begin{enumerate}
-  \item \textbf{Accuracy of labels:} We can obtain an idea of accuracy by comparing our algorithm with profiles labeled by humans, either by research assistants or crowd-sourcing systems.
-  \item \textbf{Representativeness of mobility:} There are many works and datasets available on human mobility generated from a variety of behaviors, such as other social media, phone (CDR) data, taxi data, etc. We can compare our results with these other sources to find differences and similarities in mobility.
-  \item \textbf{Understand bias:} we can compare our Instagram results, or results from studies such as the Pew Internet Survey, with those from the U.S. Census or other surveys.
-\end{enumerate}
-
-With an understanding of 
-\begin{itemize}
-  \item Create new metrics about the interactions of different demographics groups, relevant to sociologists.
-  \item Run city planning surveys at fractions the cost of more expensive mail-in surveys.
-  \item Better understand disparate impact of various services on different demographics.
-  \item Use our understanding of demographics to assess the accuracy of algorithms labeling demographics in other contexts (e.g. on Twitter or other social media)
-\end{itemize}
+\label{sec:proposal-i}
 
 
-% \section{Proposal Topic II}
-% \label{ch:proposal}
+\section{Proposal Topic II}
+\label{sec:proposal-ii}
 
 % The content of your proposal. Each topic occupies one section, each
 % with their own conclusion and future work.
 
-% \section{Research plan}
-% \label{ch:plan}
+\section{Research plan}
+\label{sec:plan}
 
 % Provide an overview of what you have done and what need to be done.
 
