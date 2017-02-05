@@ -1,0 +1,58 @@
+\subsection{Location Data}
+\textbf{What is location data?}
+Most generally, location data is information relating people to places.
+Typically, this relation is the fact that a person was at a place.
+Adding time into the figure, the relation could be that a person was at a place at a particular time.
+However, location data could also include relations about the importance of a place in someones life, such as them living in a location, working at a location, or having spent a quantity of time in a location.
+Though location data does not need to be associated with user IDs, in this work we will consider that there is always attached some sort of user ID that unqiuely identifies the user in the dataset, possibly de-personalized.
+
+Location data can be described in two main ways: \textbf{geographically} or \textbf{semantically}.
+\emph{Geographic} data can be described by a latitude-longitude data on the globe.
+\emph{Semantic} location data refers to an identifier used within that dataset.
+This could have some information available to a common user, e.g. ``New York City", or it could simply be an identifier, e.g. 7.
+Note that often these two may be combined or used together.
+A location such as ``CEPSR Office 618, Columbia University" (the author's office) indicates a very small, non-ambiguous location that can easily be mapped to geographic coordinates.
+Semantic location data can sometimes present a privacy problem, as an association with a place could indicate sensitive attributes, such as someone's religion, political affiliation, health, or sexuality.
+In this work, I will typically assume location data is also tagged with temporal data, and I will use the terms location data and spatiotemporal data interchangeably.
+
+To put this more formally, we can define a single data point $p$ of location data to be:
+\[ p = \langle u, l \rangle \]
+or, including time:
+\[ p = \langle u, l, t \rangle \]
+where $u$ uniquely identifies a user, $l$ uniquely identifies a location, and $t$ specifies a time.
+Note that $l$ could be a latitude-longitude pair in the geographic case or an ID in the semantic case.
+
+\textbf{How is location data collected?}
+Location data can be captured passively or actively.
+\textbf{Actively captured} location data is only recorded when the user takes some action.
+Note that this action does not need to inherently be ``about" location data, for example, a user making a call from a cell phone or swiping a credit card is typically not consciously thinking about their location data. 
+A record of their location is created as a by-product of their use of that technology.
+\textbf{Passively captured} is meant in a stronger way-- the user's location is captured without the user making any kind of action.
+This can occur through tracking apps.
+An example is MapMyRun\footnote{\url{http://www.mapmyrun.com/}}, an app where users record their routes while running, in order to track distance and progress in meeting exercise goals.
+Although the user took an action to start recording their location, the location is recorded in the background with no user action from then on, and hence we call it ``passive".
+Another example is Google's location history.
+Google records location data in the background of a users Android phone every few minutes.
+A map of everywhere a user (with an Android phone with location history turned on) is available at \footnote{\url{https://www.google.co.in/maps/timeline}}.
+
+\textbf{What is location used for?}
+TODO
+
+
+
+\subsection{Privacy}
+\label{ssec:privacy}
+Privacy has been an important concept, brought to the forefront of public debate as surveillance of users has grown, both by governments and private companies.
+
+ADD MORE STUFF
+
+In this work, we will focus on two technical conceptions of privacy, \emph{k-anonymity} and \emph{differential privacy}.
+
+\textbf{k-anonymity} 
+
+\textbf{Differential privacy}
+
+
+\subsection{Bias}
+
+\subsection{Online Advertising}

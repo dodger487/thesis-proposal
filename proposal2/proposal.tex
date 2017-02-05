@@ -46,15 +46,7 @@ Columbia University\\
 
 \pagebreak
 \begin{abstract}
-
-Ubiquitous, mobile computing in the form of smartphones has created data that lets us study human behavior like never before.
-In particular, data about human mobility has allowed us to understand the hows and whys of human movement.
-At the same time, these new collections of data can present societal risks, as we've now enabled mass surveillance, a loss of privacy, and algorithmic bias.
-
-In this thesis proposal, I describe recent work that attempts to balance the scientific and engineering promises of location data with the potential risks.
-I will describe work I have completed relating location data to privacy, anonymity, economics, and algorithmic bias.
-I propose future research to be completed in the form of a thesis, advancing knowledge of location-based demographics and algorithmic bias.
-
+\input{abstract.tex}
 \end{abstract}
 
 \pagebreak
@@ -66,178 +58,44 @@ I propose future research to be completed in the form of a thesis, advancing kno
 
 \section{Introduction}
 \label{ch:intro}
-
-TODO
-
-I will begin with a background section which introduces the core concepts found in this proposal: location data, privacy, and bias.
-I proceed with three chapters detailing completed work.
-Each chapter contains a section summarizing relevant prior work.
-
-\chap{sec:econ} focuses on location data, privacy, and economics.
-We begin with work that seeks to understand user attitudes to their privacy and the economic value of their information.
-Specifically, it examines an alternative to the current practice of firms offering free services in exchange for full control over user data.
-The alternative model is one in which users control their data and make decisions about when to sell access to their info, and to whom.
-
-% Linking Users Across Domains with Location Data
-% FindYou
-\chap{sec:anon} examines the possibility of anonymizing location data.
-Prior work has shown that users are highly unique in their location patterns, leaving them vulnerable to deanonymization (see~\ref{ssec:privacy}).
-Here we take this a step further, showing not only that this vulnerability exists, but that users indeed can be linked to other datasets.
-Additionally, we provide a tool to users that aggregates and displays their location data along with the potential inferences made from it.
-
-
-% I Don’t Have a Photograph But You Can Have My Footprints
-% Under submission work on demographic labeling
-% Current work on bias!
-\chap{sec:bias} shows the potential for location data to be part of systems that 
-We gather a dataset of locations attached to demographic information from a popular image-sharing mobile application.
-This data allows us to study the differences in human mobility across different groups, and moreover, to show that demographics can be inferred using only location data.
-This raises questions about the sensitivity of location data, and about the potential for bias in systems that make decisions based on location data.
-We examine other methodologies for inferring demographics from social network data and discuss debiasing of algorithms.
-
-\chap{sec:proposal-i}
-
-\chap{sec:proposal-ii}
-
-I conclude with a plan for completing this work in \chap{sec:plan}.
-
-
-
-
-
-
+\input{introduction.tex}
 
 
 \section{Background}
 \label{sec:background}
-This part talks about related work of your proposal.
-
-\subsection{Location Data}
-\textbf{What is location data?}
-Most generally, location data is information relating people to places.
-Typically, this relation is the fact that a person was at a place.
-Adding time into the figure, the relation could be that a person was at a place at a particular time.
-However, location data could also include relations about the importance of a place in someones life, such as them living in a location, working at a location, or having spent a quantity of time in a location.
-Though location data does not need to be associated with user IDs, in this work we will consider that there is always attached some sort of user ID that unqiuely identifies the user in the dataset, possibly de-personalized.
-
-Location data can be described in two main ways: \textbf{geographically} or \textbf{semantically}.
-\emph{Geographic} data can be described by a latitude-longitude data on the globe.
-\emph{Semantic} location data refers to an identifier used within that dataset.
-This could have some information available to a common user, e.g. ``New York City", or it could simply be an identifier, e.g. 7.
-Note that often these two may be combined or used together.
-A location such as ``CEPSR Office 618, Columbia University" (the author's office) indicates a very small, non-ambiguous location that can easily be mapped to geographic coordinates.
-Semantic location data can sometimes present a privacy problem, as an association with a place could indicate sensitive attributes, such as someone's religion, political affiliation, health, or sexuality.
-In this work, I will typically assume location data is also tagged with temporal data, and I will use the terms location data and spatiotemporal data interchangeably.
-
-To put this more formally, we can define a single data point $p$ of location data to be:
-\[ p = \langle u, l \rangle \]
-or, including time:
-\[ p = \langle u, l, t \rangle \]
-where $u$ uniquely identifies a user, $l$ uniquely identifies a location, and $t$ specifies a time.
-Note that $l$ could be a latitude-longitude pair in the geographic case or an ID in the semantic case.
-
-\textbf{How is location data collected?}
-Location data can be captured passively or actively.
-\textbf{Actively captured} location data is only recorded when the user takes some action.
-Note that this action does not need to inherently be ``about" location data, for example, a user making a call from a cell phone or swiping a credit card is typically not consciously thinking about their location data. 
-A record of their location is created as a by-product of their use of that technology.
-\textbf{Passively captured} is meant in a stronger way-- the user's location is captured without the user making any kind of action.
-This can occur through tracking apps.
-An example is MapMyRun\footnote{\url{http://www.mapmyrun.com/}}, an app where users record their routes while running, in order to track distance and progress in meeting exercise goals.
-Although the user took an action to start recording their location, the location is recorded in the background with no user action from then on, and hence we call it ``passive".
-Another example is Google's location history.
-Google records location data in the background of a users Android phone every few minutes.
-A map of everywhere a user (with an Android phone with location history turned on) is available at \footnote{\url{https://www.google.co.in/maps/timeline}}.
-
-\textbf{What is location used for?}
-TODO
-
-
-
-\subsection{Privacy}
-\label{ssec:privacy}
-Privacy has been an important concept, brought to the forefront of public debate as surveillance of users has grown, both by governments and private companies.
-
-ADD MORE STUFF
-
-In this work, we will focus on two technical conceptions of privacy, \emph{k-anonymity} and \emph{differential privacy}.
-
-\textbf{k-anonymity} 
-
-\textbf{Differential privacy}
-
-
-\subsection{Bias}
-
-\subsection{Online Advertising}
-
-
-\subsection{Related work}
-\label{sec:related}
+\input{background.tex}
 
 
 \section{Location Data, Privacy, and Economics}
 \label{sec:econ}
-
-Your Browsing Behavior for a Big Mac (maybe?)
-For Sale: Your Data. By: You (some portion?)
-Challenges of Keyword-Based Location Disclosure
-
+\input{econ.tex}
 
 
 \section{Location Data and Anonymity}
 \label{sec:anon}
-Linking Users Across Domains with Location Data
-FindYou
+\input{anon.tex}
 
 
 
 \section{Location Data, Demographics, and Bias}
 \label{sec:bias}
-
-I Don’t Have a Photograph But You Can Have My Footprints
-Under submission work on demographic labeling
-Current work on bias!
-
+\input{bias.tex}
 
 
 \section{Proposal Topic I}
 \label{sec:proposal-i}
+\input{proposal-i.tex}
 
 
 \section{Proposal Topic II}
 \label{sec:proposal-ii}
+\input{proposal-ii.tex}
 
-% The content of your proposal. Each topic occupies one section, each
-% with their own conclusion and future work.
 
 \section{Research plan}
 \label{sec:plan}
+\input{research-plan.tex}
 
-% Provide an overview of what you have done and what need to be done.
-
-% \subsection{Plan for completion of the research}
-
-% Table \ref{tab:plan} shows my plan for completion of the research.
-
-% \begin{table}[h]
-% \begin{small}
-% \begin{center}
-% \begin{tabular}{lll}
-% Timeline & Work & Progress\\
-% \hline
-%           & XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX & completed\\
-% Nov. xxxx & XXXXXXXXXXXXXXXXXXXXXXXXXXX & ongoing\\
-% Jan. xxxx & Thesis writting & \\
-% Feb. xxxx & Thesis defense & \\
-% \end{tabular}
-% \end{center}
-% \end{small}
-% \caption{Plan for completion of my research}
-% \label{tab:plan}
-% \end{table}
-
-% Thus, I plan to defend my thesis in XXX XXXX.
 
 \pagebreak
 
