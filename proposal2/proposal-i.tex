@@ -1,0 +1,33 @@
+% Algorithmic bias is bad
+% Recent work has been more about theory, less about real data analysis
+% I have a cool new dataset that allows me to do data analysis
+
+As described in \chap{sec:bias}, an important challenge facing the computer science community is algorithmic bias.
+In recent years, an emerging body of work has focused on different mitigating techniques, 
+  such as automated discovery of bias, ``de-biasing" existing algorithms, or theoretical analyses of differnet types of bias.
+De-biasing techniques are sure to incur a cost: the objective function of the algorithm is no longer as straightforward, and organizationally new infrastructure needs to be put into place for something that could hurt revenue.
+Understanding the key trade-offs between revenue and uncertain risk will be important to insure real-world adoption.
+Although there have been some good initial insights, the community has lacked strong data-driven analysis on this trade off.
+
+I propose to fill this gap by applying proposed techniques to real-world problems through the use of an innovative dataset.
+Namely, I will look at the real-world problems of recommendation systems within a large social network.
+I will examine the trade off between recommendation accuracy, bias, and revenue.
+
+Over the course of several months I have gathered photo metadata from the popular image-sharing application Instagram.
+I have run these photos through a program that recognizes faces within each image, tagging it with age, gender, and ethnicity.
+This will create the largest publicly available dataset that I know of connecting human mobility to demographics.
+
+Machine learning systems utilize location in making recommendations.
+However, location can be highly correlated with potentially sensitive traits, such as ethnicity.
+I plan to look at 
+
+
+The project will emerge in several stages.
+\begin{enumerate}
+  \item Collection of instagram data (completed).
+  \item Labeling of instagram data with Face++ API (completed).
+  \item Initial analysis and descriptive statistics of dataset (in progress).
+  \item Full problem specificiation: algorithms, inputs, and objectives.
+  \item Apply de-biasing to algorithms and analyze impacts.
+  \item Create recommendations for algorithm designers.
+\end{enumerate}
