@@ -1,2 +1,54 @@
 % The content of your proposal. Each topic occupies one section, each
 % with their own conclusion and future work.
+
+% Intro
+In \chap{proposal-ii.tex}, I proposed analyzing debiasing algorithms in the setting of an typical online for-profit company trying to optimize their profit.
+Beyond private enterprise, algorithms play an important role in the civil domain, from decisions about whether to release prisoners on bail to the hopefully fair allocation of scarce resources.
+The purpose of this project is to take an in-depth look at a government-run matching algorithm, the New York City High School Assignment, with an aim towards analyzing and possibly mitigating inequality.
+
+The New York City Department of Education has a large challenge in efficiently and fairly placing TODO(a large number of) students into high schools.
+The Department uses a matching algorithm which has some successes: 92\% of students are matched and 85\% are assigned to one of their top five choices.
+At the same time, New York City schools are highly racially segregated, with around half of all schools having a student body that is over 90\% black and Latino, despite the city's overall student population being just TODO\% black and Latino.
+There are a variety of potential explanations for this result.
+For example, are the rank lists of students self-selecting into racially homogeneous schools?
+New York housing has high levels of de facto segregation, and thus students only ranking and attending schools near their homes could be another cause.
+Additionally, decision criteria at schools, a lack of opportunities at lower levels, or other factors could be causes.
+
+The purpose of this research is to understand if different populations of students are exhibiting different behaviors in their rank lists, and to what extend these differences lead to the skewed results we see in practice.
+I intend to analyze several different groups, such as racial groups and economic groups.
+Beyond analyzing the match data, I will additionally adapt and apply Dwork's fairness algorithm~\ref{TODO(dwork)} and analyze the impact on student utility, school utility, and segregation.
+
+To conduct this research, I will need data from the New York City Department of Education, namely:
+\begin{enumerate}
+  \item The rank lists and assignments of students who entered the High School Admissions Program, as well as the rank lists for the schools.
+  \item Biographic dataset files for the anonymous students, which includes information on age, ethnicity, free lunch status (an indicator of socioeconomic status), attendance data, and more.
+  \item If available, normalized information about the admissions criteria or requirements associated with each school.
+\end{enumerate}
+
+There are two main deliverables for this work: data analysis for hypothesis testing, and an analysis of a debiasing algorithm.
+In the hypothesis testing portion, I will examine if there are differences in rank-list creation across racial groups and socioeconomic groups.
+The biographic dataset, available from the DoE for researchers, contains information about ethnicity, language spoken at home, and a commonly-used proxy for socioeconomic status: student entrance in reduced or free lunch program.
+Student are only eligible for reduced or free lunch if they live in a household with annual income below a certain threshold (TODO(verify, get numbers)).
+I will look for differences in the following behaviors:
+\begin{itemize}
+  \item Length of rank list
+  \item Average school quality of rank list
+  \item \emph{Distribution} of school quality on rank list
+  \item Geographic distribution of schools
+  \item Current racial/socioeconomic make up of school
+\end{itemize}
+
+In the analysis of the debiasing algorithm, I will first adapt Dwork's fairness algorithm~\ref{TODO(dwork)} to work with matching data.
+Dwork's algorithm relies on the existence of a similarity metric between users.
+I will develop a metric (based on standardized criteria as test scores, attendance, etc.).
+There are many possibly metrics TODO(mention some) and I plan to test out several.
+Dwork's paper additionally provides a method of ``fair" affirmative action.
+A measure of utility for students can be calculated as matched school quality or matched school rank on rank list.
+A school's utility can be calculated as the school's average ranking of its matched students.
+I plan to test several similarity metrics and affirmative action techniques and investigate the impact of utility for both schools and students.
+
+This work is entirely contingent upon the availability of this data.
+As such, this project proposal is given as a possible additional undertaking, and will not form the core of my thesis given the high level of risk.
+A number of other researchers at Columbia have previously obtained this data from the NYC Department of Education.
+I submitted a formal data request to the Department of Education on February 9th, 2017, and hope to hear back soon.
+
