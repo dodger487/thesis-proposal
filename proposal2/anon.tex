@@ -46,7 +46,7 @@ An individual may be more likely to make phone calls in quiet places, like the h
 
 TODO: put some math here?
 
-In ``Linking Users Across Domains with Location Data", published at WWW in 2016, we tackled this problem, linking users across two entirely different datasets.
+In ``Linking Users Across Domains with Location Data", published at WWW in 2016~\cite{riederer2016linking}, we tackled this problem, linking users across two entirely different datasets.
 
 % Describe problem setting
 \begin{figure*}[t]
@@ -57,11 +57,36 @@ In ``Linking Users Across Domains with Location Data", published at WWW in 2016,
   \label{fig:linking_explain}
 \end{figure*}
 
-% Describe algorithm (and possibly the score)
+% Describe problem
+We formalized the problem in the following manner.
+We defined $U$ and $V$ to be sets of $n$ user accounts in two separate domains.
+Each account is a itself a set of spatiotemporal points $p$, where
+\[ p = \langle u, l, t \rangle \]
+with $u$ being a user ID unique to either $U$ or $V$, $l$ is a location, and $t$ is a time.
+We denoted $\sigma_I$ to be a true (``identity'') mapping that correctly links the two accounts of the each user across $U$ and $V$.
+The goal then, of this work, is to recover $\sigma_I$.
+    
+We made a series of simple assumptions about human mobility.
+We broke time into discrete ``bins" of a certain length, and then declared the number of checkins a user has at each location in time bin to be Poisson distributed according to a rate paramater $\lambda$ unique to that time and place.
+This is a simple but reasonable assumption, and Poisson distributions are often used to model rare events (like checkins).
 
+This model generates the \emph{real world} mobility of a user.
+We assume that this real world mobility is sampled independentally and randomly for the two different data sets with probability $p_U$ and $p_V$.
+
+\fig{fig:linking_explain} provides a visual illustration.
+On the left side of the image are two real world trajectories, denoted with a blue and turquoise line.
+The x axis shows space and the y axis shows time.
+The colored circles (red, green, gray and yellow) show times and places where the real world trajectories are sampled, with (for example) a geolocated photograph, phone call, or checkin.
+The challenge is that we only see the green, yellow, red, and gray trajectories in the middle of the image, and we must figure out the true association across datasets.
+In this example, red should go with green and gray with yellow.
+On the right side of the image, the concept of time bins are illustrated.
+We discretize time with varying sized time bins.
+The top uses one large time bin, essentially ignoring time, whereas the bottom breaks time into four sections, essentially saying two locations are only the same if the checkins occur near one another in time.
+
+% Describe algorithm
+% Based on these assumptions, we were able to develop a maximum likelihood 
 
 % Describe dataset
-
 \begin{table*}
   \centering
   \begin{tabular}{llrrrrr}
@@ -113,6 +138,39 @@ We gathered three datasets:
 Statistics about these datasets is summarized in Table~\ref{tab:link-data}.
 
 % Describe results
+\begin{figure*}[th!]
+  \centering
+  \hspace{-0.7cm}
+  \includegraphics[width=0.35\linewidth]{fig/fs_scatter.eps}
+  \hspace{-0.7cm}
+  \includegraphics[width=0.35\linewidth]{fig/ig_scatter.eps}
+  \hspace{-0.7cm}
+  \includegraphics[width=0.35\linewidth]{fig/gd_scatter.eps}
+  \caption{Precision and Recall plots for each dataset.}
+  \vspace{1ex}
+  \label{fig:link-prec-recall}
+\end{figure*}
+
+We now turn our attention to experimental performances of our algorithm. 
+In Figure~\ref{fig:link-prec-recall}, we show the precision recall plots for our algorithm (for different eccentricity values) and for the other three reconciliation techniques: HIST, NFLX and WYCI. 
+For our algorithm, we used estimated parameters and  for the other techniques, we used optimal parameters (found via exhaustive search).
+
+There are several interesting observations that we can make on Figure~\ref{fig:link-prec-recall}. 
+First, on the public dataset FQ-TWT our algorithm outperforms all prior methods (especially in precision). 
+Nevertheless it is interesting to note that the precision of all methods is not ideal, probably due to sparsity of the data.
+
+A second interesting observation is that our algorithm achieves very high precision when the dataset is more rich. 
+In fact when we then turn our attention to our second dataset, the live service (IG-TWT) that we crawled, we obtain almost perfect precision. 
+Note that not all the other techniques, for example NFLX, are able to leverage the denser data, as much.
+
+Finally we test our method on a much more heterogeneous dataset (Call-Bank) that is also more realistic and sensitive. 
+In this setting our algorithm outperforms previous techniques, with none of the previous algorithms able to achieve good precision and recall at the same time. 
+
+% TODO(can possible add more results)
+Other results found that our algorithms rapidly improved with more data.
+Additionally, varying the size of timebins or the eccentricity parameter or number of terms did not have a large impact on results, meaning our algorithm's performance should remain stable to different sets of parameters.
+
+% Conclusion?
 
 
 \subsubsection{FindYou: A Personal Location Privacy Auditing Tool}
