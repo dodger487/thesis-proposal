@@ -1,0 +1,137 @@
+% Introduce the section-- why do we present a theoretical understanding?
+We now present a theoretical understanding of the problem of inferring user attributes from location data.
+This understanding has multiple purposes: first, it points to a deeper understanding of the problem, and second, it should be useful in the most fundamental of 
+How different must the mobility patterns of two groups be in order for us to distinguish between them?
+How many checkins do we need to have confidence in our prediction of a user class?
+
+% Briefly summarize the results
+We will show that, given some assumptions about human mobility, the problem of differentiating between two users reduces to that of simple hypothesis testing. This means that the simple likelihood-ratio test is the most powerful statistical test for distinguishing between two groups of users based on their mobility behaviors.
+
+% Define nomenclature
+We will use the following nomenclature. 
+Assume that each user, $i$, belongs to one of two classes, $C_1$ or $C_2$. 
+Each class is associated with a probability distribution over a discrete set of locations.
+Each user makes $m_i$ checkins, represented as an ordered list of locations denoted $X^{(i)}=(X^{(i)}_1,\ldots,X^{(i)}_n)$
+These checkins are locations drawn independently and identically distributed from a user's class distribution.
+The prior probability that a user is in class $C_1$ or $C_2$ is denoted $\pi_1$ and $\pi_2$, respectively.
+
+Note that this model does not use a notion of time, geography, or auxiliary information.
+Thus, it is extremely simple, and can apply to most data sets of location data, being agnostic to
+  auxiliary data sources, manner in which it was generated, and anonymization.
+Although in practice humans show periodicity in their movements and users in a class may not be 
+  identically distributed, this simple model serves as a valuable starting point and 
+  has been used in other works as an approximation of human mobility (CITE).
+
+If $i$ is in cluster $C_1$ it follows an i.i.d. mobility pattern. 
+For any location $l$, 
+\[ P(X^{(i)}_j=l | i\in C_1)=\mu^{(1)}_l \]
+where 
+\[ \sum_{l} \mu^{(1)}_l=1 \]
+
+By Bayesian inference, this implies: \\
+$ P(X^{(i)} = (l_1,\ldots,l_n)|i \in C_1 ) = \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} $ \\
+$ P(X^{(i)} = (l_1,\ldots,l_n)|i \in C_2 ) = \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n} $ 
+
+Then \\
+\begin{align}
+P( i \in C_1 | X^{(i)} = (l_1,\ldots,l_n) ) &= \frac{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} }{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} + \pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n}} \\
+&= \frac{1}{1 + \frac{\pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n}}{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n}}}
+\end{align}
+
+A Bayesian classification will then classify a user in cluster 1 iff \\
+$\pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n} < \pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n}$ or, equivalently, $\sum_{k=1}^n \ln\frac{\mu^{(1)}_{l_k}}{\mu^{(2)}_{l_k}} > \ln\frac{\pi_2}{\pi_1}$
+
+% Show that this is the same as the simple hypothesis test
+% Show that Neyman-Pearson should be used
+Given a set of checkins, we wish to determine which class is more likely to have generated those checkins.
+This is completely analogous to selecting a more likely probability distribution given a set of samples.
+In 1933, Neyman and Pearson showed that the most powerful statistical test to resolve this is the likelihood ratio test.
+
+% Equations explaining this?
+
+
+Furthermore, it has been shown that, given $m_i$ samples, the error decreases exponentially as a function of $m_i$.
+More precisely,
+\[ Pr[\textrm{error} | m_i \textrm{ checkins}] = 2^{-m_i C(P_1, P_2)} \]
+where $m_i$ is the number of $i$'s checkins, 
+$P_1$ and $P_2$ are the probability distributions associated with $C_1$ and $C_2$, 
+and $C$ is the Chernoff information, $C(P_1, P_2) = -\min_{0 \leq \lambda \leq 1} \sum_{z \in Z} P_0[z]^{1-\lambda} P_1[z]^\lambda$.
+
+% Graphs? Additional results?
+
+
+
+
+
+
+
+
+% In order to better understand the problem of inferring user attributes from location data, we show that, given some assumptions, the problem reduces to the 
+
+% We show that, given the assumption that two groups make checkins ,
+% the problem of determining group membership is equivalent to the simple hypothesis testing problem, and thus a likelihood-ratio test is the most powerful test.
+
+% In reality, human mobility violates this assumption, as it has been shown to be quite periodic and TODO (CITE).
+% However, this simple model serves as a valuable starting point, and has been used in other works as an approximation of human mobility (CITE).
+
+
+% A user, $i$, belongs to one of two possible classes of users, $C_1$ or $C_2$.
+% Each class is associated with a probability distribution over a discrete set of locations.
+% Each user makes $m_i$ checkins, represented as an ordered list of locations denoted $X^{(i)}=(X^{(i)}_1,\ldots,X^{(i)}_n)$
+% These checkins are locations drawn independently and identically distributed from a user's class distribution.
+% The prior probability that a user is in class $C_1$ or $C_2$ is denoted $\pi_1$ and $\pi_2$, respectively.
+
+% If $i$ is in cluster $C_1$ it follows an i.i.d. mobility pattern. 
+% For any location $l$, 
+% \[ P(X^{(i)}_j=l | i\in C_1)=\mu^{(1)}_l \]
+% where 
+% \[ \sum_{l} \mu^{(1)}_l=1 \]
+
+% By Bayesian inference, this implies: \\
+% $ P(X^{(i)} = (l_1,\ldots,l_n)|i \in C_1 ) = \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} $ \\
+% $ P(X^{(i)} = (l_1,\ldots,l_n)|i \in C_2 ) = \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n} $ 
+
+% Then \\
+% \begin{align}
+% P( i \in C_1 | X^{(i)} = (l_1,\ldots,l_n) ) &= \frac{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} }{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n} + \pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n}} \\
+% &= \frac{1}{1 + \frac{\pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n}}{\pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n}}}
+% \end{align}
+
+% A Bayesian classification will then classify a user in cluster 1 iff \\
+% $\pi_2 \mu^{(2)}_{l_1}  \ldots \mu^{(2)}_{l_n} < \pi_1 \mu^{(1)}_{l_1}  \ldots \mu^{(1)}_{l_n}$ or, equivalently, $\sum_{k=1}^n \ln\frac{\mu^{(1)}_{l_k}}{\mu^{(2)}_{l_k}} > \ln\frac{\pi_2}{\pi_1}$
+
+% Let us introduce the increment $\psi^{(a,b)}_{i,k}=\ln\frac{\mu^{(a)}_{l_k}}{\mu^{(b)}_{l_k}}$. 
+% $\psi_{i,k}^{a,b}$ is the $k_{th}$ log-increment characterizing the Bayesian cluster detector between hypothesis \{$i$ is in $a$\} vs. hypothesis \{$i$ is in $b$\}, for user $i$ that we assume is in cluster $a$.
+%  Since $l_k$ is chosen to be $l$, independently of $k$ and $i$ as a location with probability $\mu_l$, we have that this is an i.i.d. sequence in $i$ and $k$, and that \\
+% $E[\psi^{(a,b)}_{i,k}] = d_{KL}(\mu^{(a)},\mu^{(b)})$
+
+% We can now consider a random variable $s$ which has $P(s = \psi^{(a,b)}_{i,k} | i \in C_a) = \mu_{l_k}^{(a)}$. 
+% Denote $\psi_{max}, \psi_{min}$ to be the maximum and minimum values that $s$ can take.
+% Let $S_i^m = \sum_{c=1}^m s_i^c$ denote the sum of all $s$ values for $i$'s first $m$ checkins.
+% If $S_i^m > \ln\frac{\pi_2}{\pi_1}$, $i$ will be predicted to be $C_1$, otherwise $i$ will be predicted to be in $C_2$.
+
+% Note that $E[S_i^m | i \in C_a] = D(a || b)$, where $D$ denotes the relative entropy.
+
+% Suppose $i$ is in $C_a$. 
+% Then,
+% $P[S_i^m \leq t] \leq P[ |S_i^m -E[S_i^m] | \geq E[S_i^m] - t]$
+
+% Because $S_i^m$ is the sum of independent random variables inside the segment $[\psi_{min}, \psi_{max}]$, we can use Hoeffding's inequality to say that
+% \begin{align}
+% P[S_i^m \leq t] \leq P[ |S_i^m -E[S_i^m] | \geq E[S_i^m] - t] \\
+% P[ |S_i^m -E[S_i^m] | \geq E[S_i^m] - t] &\leq 2\exp \left( - \frac{2(E[S_i^m] - t)^2}{\sum_{c=1}^m (\psi_{max} - \psi_{min})^2} \right) \\
+%   &\leq 2\exp \left( - \frac{2(mE[s] - \ln\frac{\pi_2}{\pi_1})^2}{m(\psi_{max} - \psi_{min})^2} \right)
+% \end{align}
+
+% In the case where the classes are equally balanced, we have:
+% \[ P[\textrm{ error} |i \in C^{(1)} = P[S_i^m > 0] \leq 2\exp \left( - \frac{2mD(\mu_1||\mu_2)}{(\psi_{max} - \psi_{min})^2} \right) \]
+
+% More precisely:
+% \begin{align}
+% P[\textrm{error}] &= P[S_i^m \leq \frac{\pi_2}{\pi_1} | i \in C^{(1)}]P[i \in C^{(1)}] + P[S_i^m \geq \frac{\pi_2}{\pi_1} | i \in C^{(2)}]P[i \in C^{(2)}] \\
+% &\leq 2\pi_1\exp \left( - \frac{2(mD(\mu_1||\mu_2) - \ln\frac{\pi_2}{\pi_1})^2}{m(\psi_{max} - \psi_{min})^2} \right)
+%       + \pi_2\exp \left( - \frac{2(\ln\frac{\pi_2}{\pi_1} - E[S_i^m|i\in C^{(2)}])^2}{m(\psi_{max} - \psi_{min})^2} \right)
+% \end{align}
+% The difficulty in the second term is that relative entropy is not symmetric. $E[S_i^m | i \in C^{(1)}] = D(\mu_1||\mu_2)$, however, $E[S_i^m | i \in C^{(2)}] \neq D(\mu_1||\mu_2)$
+
+% Thus, provided classes $C^{(1)}$ and $C^{(2)}$ have different distributions, the larger the relative entropy is between them and the more checkins we have, the larger chance we have of correctly distinguishing the users into two groups.
