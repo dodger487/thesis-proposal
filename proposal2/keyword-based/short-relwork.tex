@@ -1,0 +1,37 @@
+\section{Related Work}
+\label{sec:relwork}
+
+%We have presented an economic solution to location privacy that we refer to as
+%transactional location privacy. Our solution has a economic component that
+%associates a value to each location disclosure and a systems component that 
+%helps maintain privacy. 
+
+%Lot of work has been done on the economics of information disclosure~\cite{Ghosh:2011jy, Cvrcek:2006vv, Danezis:2005wq}.
+%Ghosh et al. discuss and analyze economic value of information as treated by differential privacy~\cite{Ghosh:2011jy}. 
+%Our work is different in that we focus on location information and we stress releasing non-obfuscated, pure information, instead of adding noise to a release as differential privacy dictates. 
+%We believe releasing raw data is crucial for any solution to be supported by web service providers. 
+%Carrascal et al~\cite{Carrascal} utilized experience sampling to study how users value their personal information online.
+%Danezis et al studied specifically the worth of location information from
+%the perspective of users~\cite{Cvrcek:2006vv, Danezis:2005wq}.
+%Our work seeks to create a market that determines a price for user data based on what companies are willing to pay and what consumers are willing to receive.
+%% Our work is complementary as we develop a model to quantify how much location is worth from the perspective of ad-networks and aggregators.
+
+Our work is part of a growing body of work that deals with privacy solutions that aim to reconcile the privacy concerns of users with the economic needs of `free' online web services and mobile applications~\cite{Guha:2011wj, guha:koi, Riederer:2011ta, Toubiana:2010tm}. 
+Privad~\cite{Guha:2011wj} and Adnostic~\cite{Toubiana:2010tm} are browser based systems that enable behavioral targeting while ensuring users' PII is not leaked to ad-networks performing the targeting. 
+Our focus in this paper is different -- we are concerned with location information on mobile devices. 
+Koi~\cite{guha:koi} is a system developed to address location privacy by way of location matching -- applications and service providers pre-declare which locations they would be interested in and the device releases this information at those specified locations. 
+Our solution is different, in that we have an economic component where application developers need to pay
+to access the user at the specified location. 
+In addition, neither the device nor applications have to be modified to use our solution. 
+% We believe incentives of economic gains are much stronger to increase adoption of a privacy solution. 
+Our work is closely related to transaction privacy~\cite{Riederer:2011ta}.
+The difference is that we focus on location information for mobile devices and develop a keyword-based disclosure scheme.
+% an economic model of location information to drive our market. 
+
+% With less econ, this is deemphasized a bit...
+% Bacelli et al~\cite{infocom:fb} authors propose models to quantify the economic value of various locations, with the specific example of proximity advertising in mind.
+% With regards to the economic valuation of location information, the closest work to ours is the work by Bacelli et al~\cite{infocom:fb} where the authors propose models to
+% This is similar to our proposal, in that we too focus on proximity advertising and are interested in real-time location information. 
+% The main difference is that our approach is more empirically driven and much simpler with fewer assumptions. We rely on keywords associated with locations (derived from real data) and make no assumptions on how various businesses are distributed in a geographical region.  
+% We focus more on intent, captured by frequency of visits to a location, to approximate interest in a location and the propensity to conduct a commercial transaction at that location.
+% Bacelli et al rely on a set of interests of a user that are known to the model.

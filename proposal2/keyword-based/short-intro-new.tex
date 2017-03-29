@@ -1,0 +1,124 @@
+\section{Introduction}
+\label{sec:intro}
+
+% Broad topic
+% Specifics of topic and importance
+% Previous gaps we're trying to address
+% Core research challenge
+% Roadmap
+
+%VE: too much intro stuff. Just need one para!
+% Overview
+%When it comes to privacy, one of today's most widely open problems is posed by location information. Knowing \emph{where} a user is \emph{at any time} is remarkably sensitive but also extremely informative and valuable. Mobile devices such as smartphones and tablets, which represent a growing fraction of users' browsing time, make it increasinlgy easy to capture, store and monetize users' real-time locations. 
+
+% Importance: value of LI
+% Narrow LI down to realtime mobile devices
+The rapid adoption of smart phones and tablets has led to innovative applications and services
+that exploit location information. Location information is increasingly used to
+drive advertising -- location-based targeting generates four times as much revenue per impression compared to ads 
+without location data\footnote{\url{http://bit.ly/vXWdsw}}. Even brick-and-mortar stores use location data, with retailers 
+using cell phones' WiFi signals to learn where customers spend time in their stores\footnote{\url{http://nyti.ms/15vLRva}}.
+
+There are many privacy concerns surrounding the use of this data.
+%Location information is more sensitive than other types of personally identifiable information (PII) not only because it can reveal private activities, but because knowledge of a person's physical presence creates the possibility of physical harm.
+For example, many applications access location information even when such information is not needed, and may share it 
+with multiple third parties, leading to privacy concerns~\cite{Enck:2010, WSJ:apple} and attracting 
+the attention of regulators~\cite{USC:location, jones2012us}.
+This work focuses on location information generated in real-time by users with mobile devices.
+%location information was the focus of a recent, major United States Supreme Court case~\cite{jones2012us}.
+%Users also appear to desire access to location-based information, with 74\% of smartphone owners reportedly using their device to obtain real-time location-based information.
+
+%new revenue streams for platform providers, application developers
+%as well as traditional web 
+
+%Knowing this information is very valuable, as location-based targeting can get four times as much revenue per impression compared to ads without location data~\cite{Loc:ad}.
+%Even brick-and-mortar stores are interested in location data, with retailers using cell phones' WiFi signals to learn about how customers travel through stores~\cite{NYT:storeLoc}.
+%Users also appear to desire access to location-based information, with 74\% of smartphone owners reportedly using their device to obtain real-time location-based information.
+% TODO: CITE PEW
+% Importance: privacy issues around LI
+%At the same time, there are many privacy concerns surrounding this type of data.
+%Location information is more sensitive than other types of personally identifiable information (PII) not only because it can reveal private activities, but because knowledge of a person's physical presence creates the possibility of physical harm.
+%Concerns about location privacy have attracted the attention of regulators~\cite{USC:location, Cal:Location} and location information was the focus of a recent, major United States Supreme Court case~\cite{jones2012us}.
+%Many web services and applications access location information even when such information is not needed, and may share it with multiple third parties, raising serious privacy concerns~\cite{Enck:2010, WSJ:apple}. 
+
+% Background: Brief description of online advertising
+Many privacy concerns around location information are rooted in the mobile application ecosystem.
+Most mobile services and applications are free and operate by collecting 
+personal information (browsing activity, location, etc.) and monetizing this information 
+through targeted ads~\cite{Leontiadis:2012}. 
+% This is why, when privacy advocates request stricter rules to be enforced on information collection, they typically are opposed by companies providing these services. 
+Because it affects their profits, companies that are a part of the mobile application ecosystem oppose any regulation that may restrict access to location data and claim that the ``cost'' of a privacy bill threatens the web's general economy and ultimately hurts customers. 
+In fact, one may argue that users today exchange their data for services.
+%Privacy advocates ask for stricter regulation on information collection, while service and application providers argue that it would jeopardize the thriving economy of the mobile web. 
+An ideal privacy solution therefore should provide adequate privacy protection to the user while simultaneously
+enabling service providers to collect and monetize data. 
+Our objective is to lay the groundwork for a comprehensive and deployable solution to location privacy. 
+%Indeed, mobile privacy solutions often fail to gain traction as users judge it profitable to disclose some location information in exchange for compensation, which is found in the form of a free convenient service. A comprehensive privacy solution, in contrast, should ideally allow users to opt-in for some information disclosure when they find it profitable. 
+
+
+% What is the specific problem to address?
+% The value, sensitivity, and ease of collection of location information has led to a potentially unsustainable situation. As the technologies to capture, store, and monetize location information continues to improve, public opinion may rapidly shift, leading to legislation that bans location collection and chokes off this promising new economy. We hope to find a balanced middle ground between the producers and consumers of location information before such a situation arises.
+% Not surprisingly, this has opened a heated debate: 
+
+% Main contribution
+%The objective of this paper is to lay the groundwork for a comprehensive and deployable solution to this location privacy issue. In contrast to previous works, we aim at reconciling the control users exert over their data with its commercial value.
+%This raises three main challenges:
+
+%The solution should be \emph{incrementally deployable}: it must easily integrate with current devices and practices while giving all parties an incentive to participate.
+
+%The solution should be \emph{robust} against threats to its participants. Advertisers wishing to access data without compensating users, or access more than the users specify, should be stopped. Users privacy should be protected, but they should also not be able to receive unfair compensation.
+
+%The solution should be \emph{easy to use}: users and advertisers have to express their needs in intuitive terms.
+
+In contrast to previous work, we aim to reconcile the users' control over their location information with its commercial value.
+This approach raises three challenges:
+(1) The solution should be \emph{incrementally deployable}. It must easily integrate with current devices and practices while giving all parties an incentive to participate.
+(2) The solution should be \emph{robust} against threats from its participants. Advertisers should not be able to access data without compensating users or access more than the users specify. Users should not be able to benefit from seeking unfair compensation.
+(3) The solution should be \emph{easy to use}. The system should be easily understood by both users and advertisers.
+
+Our solution is based on selective disclosure; users decide what location information they want to disclose.
+At the heart of our solution is a \emph{keyword-based} method where keywords are associated with locations, 
+and the decision to release locations is based on keywords. 
+We observe that keywords are naturally associated with the elements that define this problem, but also offer a strong 
+abstraction to handle location data.  In order to drive the adoption of the solution,
+we propose providing economic compensation to the users for the location information they disclose. 
+Application and web service providers bid to gain \emph{access} to users at these specific locations in real-time. 
+
+%As we show later, very few works to date attempt at managing the inherent value-risk tradeoff of personal data. Arguably, no system satisfies even two of the above conditions. 
+%We propose a novel direction through a \emph{keyword-based} privacy solution grounded on a data market. We observe that keywords are naturally associated with the elements that define this problem, but also offer a strong abstraction to manipulate location data. In a nutshell, users decide what locations to release for commercial use and are compensated in return. Application and web service providers pay to gain \emph{access} to users at these specific locations, in real time. 
+Our main contributions are:
+% \begin{itemize}
+(1) The design of a keyword-based system that integrates well into today's location collection and monetization. Our solution requires no change on users' devices, a minimum level of indirection, and addresses goals like usability, deployability and
+scaling (Sec.~\ref{sec:overview}).
+(2) A test of our solution's usability and relevance with a small scale trial on real users. While this experiment is too small to form statistically significant conclusions, it allowed us to test the feasibility of our design (Sec.~\ref{sec:user-study}).
+(3) An analysis of how such a system can offer different levels of protection against various threats, including freeriding, 
+inference attacks using auxiliary information, and user misconduct (Sec.~\ref{sec:security}).
+% \item An evaluation of a deployment within the economy of mobile advertising. We use data gathered from cell phone users, geo-located services, ad-networks, and a simple revenue model. We found multiple privacy-value tradeoff that benefit users and advertisers. We find that if information is removed about most privacy sensitive locations, revenue drops by around 20\% (Sec.~\ref{sec:economic-analysis})
+% \end{itemize}
+
+%These results suggests the feasibility and promise of a solution centered on keywords. They more generally motivate to revisit how to reconcile user's location privacy with the economic interest of the mobile web. The deployment of this system poses multiple questions for each of these challenges in the long term, that we briefly discuss separately. 
+
+% % Challenges / Requirements
+% In order to realize and analyze transactional location privacy, several challenges have to be met.
+% The system has several important requirements:
+% \begin{itemize}
+% \item The system must give control to users over what information is released to advertisers.
+% \item The system needs to be user-friendly, giving both users and advertisers an intuitive way of thinking about labeling locations of different sensitivities.
+% \item The system must operate in real time and be architected in a way that preserves the users's privacy.
+% \item The system must not be vulnerable to attacks by users seeking to get unfair compensation or by advertisers seeking to infer more information than a user wishes to reveal.
+% \item Typical use of the system should not greatly reduce an advertiser's potential revenue.
+% \end{itemize}
+% We hope to meet all of these requirements in the design of our system.
+% % Or make paragraphs-- one detailing system needs, one emphasizing user issues, one talking about economics.
+% 
+% % Main results
+% 
+% 
+% % Paper Roadmap
+% The paper is laid out in the following manner:
+% Related work is discussed in Sec.~\ref{sec:relwork}.
+% The system architecture is described in Sec.~\ref{sec:overview}. 
+% The security of the system is described in Sec.~\ref{sec:security}.
+% The economic implications of the system is described in Sec.~\ref{sec:economic-analysis}.
+% A description of our user study is included in Sec.~\ref{sec:user-study}.
+% Finally, we conclude in Sec.~\ref{sec:conclusion}.

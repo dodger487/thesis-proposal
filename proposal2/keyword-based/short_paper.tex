@@ -1,0 +1,289 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+% For tracking purposes - this is V3.1SP - APRIL 2009
+
+\documentclass{sig-alternate-2013}
+% \documentclass{acm_proc_article-sp}
+
+\newfont{\mycrnotice}{ptmr8t at 7pt}
+\newfont{\myconfname}{ptmri8t at 7pt}
+\let\crnotice\mycrnotice%
+\let\confname\myconfname%
+
+\permission{Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org.}
+\conferenceinfo{WPES'13,}{November 4, 2013, Berlin, Germany.}
+\copyrightetc{Copyright 2013 ACM \the\acmcopyr}
+\crdata{978-1-4503-2485-4/13/11\ ...\$15.00.\\
+http://dx.doi.org/10.1145/2517840.2517862 }
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{epstopdf}
+\usepackage{cite}
+\newcommand{\eg}{{\it e.g.}}
+\newcommand{\ie}{{\it i.e.}}
+\newcommand{\etc}{{\it etc.}}
+
+\usepackage{color}
+\usepackage{ifthen}
+\newboolean{TECHREPORT}
+\setboolean{TECHREPORT}{false}
+\usepackage{newclude}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin2]{inputenc}
+\usepackage{balance}
+
+\definecolor{myviolet}{rgb}{0.4,0.0,0.7}
+\definecolor{heraldBlue}{rgb}{0.0,0.0,0.8}
+\definecolor{heraldRed}{rgb}{0.8,0.0,0.0}
+\definecolor{heraldGray}{rgb}{0.4,0.4,0.4}
+\definecolor{heraldBlack}{rgb}{0.0,0.0,0.0} %removes comment color
+\definecolor{heraldGreen}{rgb}{0.0,0.4,0.0} %removes comment color
+\def\r#1{\textcolor{heraldBlue}{\em #1}}
+\def\q#1{\textcolor{heraldRed}{\em #1}}
+\def\d#1{\textcolor{heraldBlue}{#1}}
+\def\R#1{\textcolor{heraldBlue}{#1}}
+\def\D#1{\textcolor{heraldBlue}{#1}} 
+
+\newcommand{\crnote}[1]{\textcolor{heraldBlue}{\small \bf [CR: #1]}}
+\newcommand{\bknote}[1]{\textcolor{heraldRed}{\small \bf [BK: #1]}}
+\newcommand{\venote}[1]{\textcolor{heraldGreen}{\small \bf [VE: #1]}}
+\newcommand{\acnote}[1]{\textcolor{red}{\small \bf [AC: #1]}}
+\newcommand{\changed}[1]{#1}
+\usepackage[breaklinks=true]{hyperref}
+
+% To import classical math notation used
+\input{mathnotation.tex}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}
+\newtheorem{proposition}{Proposition}
+\newtheorem{criterion}{Criterion}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{axiom}{{\bf  Axiom}}
+\newtheorem{property}{{\bf  Property}}
+\newtheorem{assumption}{{Assumption}}
+
+% Notation for this document
+
+% Main set
+\providecommand{\setL}{\mathcal{P}}
+\providecommand{\setK}{\mathcal{K}}
+\providecommand{\setU}{\mathcal{U}}
+
+% Relevance factor, Revenue
+\providecommand{\matA}{{A}}
+\providecommand{\Rev}{{R}}
+\providecommand{\Revtot}{{U}}
+
+% Signature
+\providecommand{\setH}{\mathcal{H}}
+
+\providecommand{\setvecS}{\textrm{\textbf{S}}}
+\providecommand{\setS}{\mathcal{S}}
+
+\newcommand{\Succ}{\textrm{Succ}}
+\newcommand{\Prec}{\textrm{Prec}}
+
+\newcommand{\cpc}{\textrm{\texttt{CPC}}}
+\newcommand{\rev}{\textrm{R}}
+\newcommand{\argmax}{\textrm{argmax}}
+\newcommand{\purU}{\widehat{\setU}}
+
+
+\providecommand{\setP}{\mathcal{P}}
+
+\frenchspacing
+\begin{document}
+
+\title{Challenges of Keyword-Based Location Disclosure}
+%\title{The Place (and the Price) is Right!\\ An Economic Solution to Location Privacy}
+% \subtitle{[Extended Abstract]
+% \titlenote{A full version of this paper is available as
+% \textit{Author's Guide to Preparing ACM SIG Proceedings Using
+% \LaTeX$2_\epsilon$\ and BibTeX} at
+% \texttt{www.acm.org/eaddress.htm}}}
+
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{4} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+%\alignauthor
+Chris Riederer, Augustin Chaintreau\\
+       \affaddr{Columbia University}\\
+       \affaddr{New York, NY, USA}\\
+       \email{\{mani,augustin\}@cs.columbia.edu}
+% 2nd. author
+       \and
+Jacob Cahan\\
+       \affaddr{Brown University}\\
+       \affaddr{Providence, RI}\\
+       \email{Jacob\_Cahan@brown.edu}
+\and
+% \alignauthor
+% Augustin Chaintreau\\
+%        \affaddr{Columbia University}\\
+%        \affaddr{New York, New York, USA}\\
+%        \email{augustin@cs.columbia.edu}
+% \and
+% 3rd. author
+%\alignauthor 
+Vijay Erramilli\\
+       \affaddr{Telef\'{o}nica Research}\\
+       \affaddr{Barcelona, Spain}\\
+       \email{vijay@tid.es}
+% \and  % use '\and' if you need 'another row' of author names
+% 4th. author
+%\alignauthor 
+% \and
+% Balachander Krisnamurthy\\
+%        \affaddr{AT\&T Labs--Research}\\
+%        \affaddr{Florham Park, NJ, USA}\\
+%        \email{bala@research.att.com}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+% \additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
+% email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
+% (The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
+% \date{30 July 1999}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+
+
+\begin{abstract}
+\input{short-abstract}
+\end{abstract}
+
+% A category with the (minimum) three required fields
+% CHRIS NOTE: ACM category changed as of 2012... not sure how this should look now.
+\category{Security and Privacy}{Human and societal aspects of security and privacy}{Usability in security and privacy}
+%A category including the fourth, optional field follows...
+% \category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Design, Economics, Human Factors}
+
+\keywords{Privacy, Location information, Mobile advertising} % NOT required for Proceedings
+
+\newpage
+\input{short-intro-new}
+% \input{intro}
+% \input{location-keywords}
+\input{short-overview-new} % Contains system description
+\input{short-user-study} % Contains system description
+\input{short-security}
+% \input{economic-analysis} % contains discussion of metrics, cost of privacy, correlation of privacy w/ value
+% \input{user-study}
+\input{short-relwork}
+% \input{discussion}
+\input{short-conclusion}
+
+
+%%% S&P STRUCTURE
+% \input{overview}
+% \input{location-advalue}
+% %\input{location-economic}
+% \input{economic-analysis}
+% \input{privacy-analysis}
+% \input{other-concerns}
+% \input{relwork}
+% \input{conclusions}
+
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{short_paper}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+\balancecolumns
+
+% \clearpage
+% \appendix
+% \input{appendix_econ.tex}
+% \input{appendix_blacklist.tex}
+
+% That's all folks!
+\end{document}

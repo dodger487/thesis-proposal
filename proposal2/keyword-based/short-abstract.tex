@@ -1,0 +1,81 @@
+A practical solution to location privacy should be incrementally deployable. We claim it should hence reconcile the \emph{economic} value of location to aggregators, usually ignored by prior works, with a user's \emph{control} over her information.
+Location information indeed is being collected and used by many mobile services to improve revenues, and this gives rise to a heated debate: Privacy advocates ask for stricter regulation on information collection, while companies argue that it would jeopardize the thriving economy of the mobile web. 
+
+We describe a system that gives users control over their information and does not degrade the data given to aggregators. 
+Recognizing that the first challenge is to express locations in a way that is meaningful for advertisers and users, we propose a \emph{keyword} based design. 
+Keywords characterize locations, let the users inform the system about their sensitivity to disclosure, and build information directly usable by an advertiser's targeting campaign. 
+Our work makes two main contributions: we design a market of location information based on keywords and we analyze its robustness to attacks using data from ad-networks, geo-located services, and cell networks.
+ % to analyze the economic consequences of such a system on ad revenue; and we conduct a small scale experiment of the system to collect preliminary results on the behavior of real users if location information markets were deployed.
+
+
+% key things:
+% 1) easy to use
+% 2) user control
+% 3) user incentive
+% 4) doesn't reduce value
+% 5) preserves privacy
+
+% 7/15/2013 version
+% Location information is increasingly being collected and used by the majority of mobile services, arguably for service personalization. 
+% However, the widespread usage of this data for improving targeted advertisements extends way beyond its intended use and potentially reveals user's location information to multiple third parties. 
+% Not surprisingly, this has opened a heated debate: Privacy advocates ask for stricter regulation on information collection, while companies argue that it would jeopardize the thriving economy of the mobile web. 
+% Indeed, mobile privacy solutions often fail to gain traction as users judge it profitable to disclose some location information in exchange for compensation, which is found in the form of a free convenient service. 
+% A comprehensive privacy solution, in contrast, should ideally allow users to opt-in for some information disclosure when they find it profitable. 
+% In this paper, we propose and evaluate a new location privacy system to reconcile the economic value of user information to the advertiser with the need for users' control. 
+% Recognizing that the first challenge is to express location in a way that is meaningful for advertisers and users, we propose a keyword based design. 
+% Keywords characterize locations, let the users inform the system about their sensitivity to disclosure, and build information directly usable by an advertiser's targeting campaign. 
+% Our work makes three contributions. First, we present a design for implementing a market of location information and discuss its security implications. 
+% Nest, we use data from ad-networks, geo-located services, and mobile traces from both online applications and records of cellular networks to analyze the potential economic consequences of such system on the revenue of advertising. 
+% Finally, we conduct a small scale experiment of the system to collect preliminary results on the behavior of real users in real location information markets.
+
+
+% OLD
+% Location information is increasingly being collected and used to personalize mobile services.
+% Additionally, mobile services increase their advertising revenues by improving targeting with this information.
+% Not surprisingly, this exchange raises many privacy concerns, with advocates and regulators asking for stricter laws governing the collection of location information.
+% Many previous works that attempt to alleviate these concerns either fail to account for the economic value of a user's personal information or create a system that is too complicated for the typical user to understand and use.
+% In this paper, we present a simple new system of location monitoring done in a privacy-sensitive way which gives control to the users while retaining value for advertisers.
+% The main idea is to let users with mobile devices opt-in to sell their location information for monetary compensation.
+% Location information is sold in a format that is both intuitively easy to grasp and yet well understood in terms of monetization: the keyword.
+% In our scheme, each location is associated with a keyword.
+% Users decide on keywords for which they feel comfortable sending their informtaion to advertisers.
+% Buyers of user information gain access to users only at locations associated with keywords that are not privacy sensitive.
+% Beyond describing our proposed design, we analyze both the system's economic implications as well as the security considerations.
+% Additionally, we build a small-scale deployment of the system, conduct a study with real users, and characterize the results.
+% Finally, we analyze the privacy and economic consequences of applying the system to real cost-per-click values from ad-networks, keywords from an online review website, public Foursquare check-ins and a massive dataset of anonymized mobility patterns from cell phone call description records.
+
+
+% OLDER
+%because it enhances the users' experience. More generally, it allows to better profile a user based on where she has been, and 
+%it also provides context on the user's immediate environment. 
+%Today, even applications that do not use your location have no relation 
+%to your location continue to track where you are, at least to increase revenue obtained from advertising third party. 
+% In this paper, we present a solution to location privacy driven by economics. 
+% The main idea is to let users with mobile devices opt-in to
+% sell their location information for monetary compensation.
+% Buyers then gain access to these users at locations that are not privacy sensitive.
+% We call our solution transactional location privacy and it consists of two major components. 
+% The first is an economic model that determines the value of location information. We develop a model
+% of quantifying this value and use two large datasets -- over a million publicly available checkins from Foursquare and anonymized mobility patterns of millions 
+% of users from two large European cities -- to analyze our model. We find that the value of 
+% location information is highly skewed -- the top 5\% of the locations
+% account for more than 60\% of the total value. 
+% This suggests that most locations have low economic value, hence need not be
+% disclosed. 
+
+% The second component is a proposal for an architecture that protects a user's privacy.
+% We use a blacklisting technique and a mapping of locations to keywords to achieve this.
+% We use a system that determines a location's sensitivity based on keywords associated with it.
+% The user creates a blacklist of keywords describing locations where they do not want to be tracked.
+% When the 	and advertisers receive no indication of the user's presence.
+% The second component is to preserve location privacy for the locations that the user does not want released. 
+% We use a combination of location matching and a blacklist (that prevents sensitive locations to released) to achieve this. 
+% Again, 
+% using real anonymized data we investigate the economic value generated in such a system and the likely revenue lost 
+% due to a user's privacy settings. %versus the content of the blacklist and 
+% We show that there is a 
+% sweet spot in terms of privacy %that can be preserved (in terms of content of the blacklist) and the
+% and the monetary value that can obtained from the
+% relatively low-sensitivity information released. We describe an architecture to achieve this. 
+%In this paper, we study for the first time the consequences of disclosing in real time your location from a joint economic-privacy perspective . While most previous algorithms aims at guaranteeing privacy condition for highest accuracy, we aim at guaranteeing these constraints for maximum value, in our case through a simplified model of advertising. We propose an incentive scheme to achieve this value while aligning users and aggregator's interests. We observe using 4 empirical traces of mobile social applications, as well as large human mobility dataset, that most of the advertising is associated with a small set of keywords and places, and that this revenue can be obtained even with new privacy guarantees.
+
