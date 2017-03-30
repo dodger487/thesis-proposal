@@ -1,0 +1,168 @@
+% \subsubsection{Challenges of Keyword-Based Location Disclosure}
+
+% The rapid adoption of smart phones and tablets has led to innovative applications and services
+% that exploit location information. Location information is increasingly used to
+% drive advertising -- location-based targeting generates four times as much revenue per impression compared to ads 
+% without location data\footnote{\url{http://bit.ly/vXWdsw}}. Even brick-and-mortar stores use location data, with retailers 
+% using cell phones' WiFi signals to learn where customers spend time in their stores\footnote{\url{http://nyti.ms/15vLRva}}.
+
+% There are many privacy concerns surrounding the use of this data.
+% %Location information is more sensitive than other types of personally identifiable information (PII) not only because it can reveal private activities, but because knowledge of a person's physical presence creates the possibility of physical harm.
+% For example, many applications access location information even when such information is not needed, and may share it 
+% with multiple third parties, leading to privacy concerns~\cite{Enck:2010, WSJ:apple} and attracting 
+% the attention of regulators~\cite{USC:location, jones2012us}.
+% This work focuses on location information generated in real-time by users with mobile devices.
+
+Many privacy concerns around location information are rooted in the mobile application ecosystem.
+Most mobile services and applications are free and operate by collecting 
+personal information (browsing activity, location, etc.) and monetizing this information 
+through targeted ads~\cite{Leontiadis:2012}. 
+% Because it affects their profits, companies that are a part of the mobile application ecosystem oppose any regulation that may restrict access to location data and claim that the ``cost'' of a privacy bill threatens the web's general economy and ultimately hurts customers. 
+In fact, one may argue that users today exchange their data for services.
+An ideal privacy solution therefore should provide adequate privacy protection to the user while simultaneously enabling service providers to collect and monetize data. 
+Our objective is to lay the groundwork for a comprehensive and deployable solution to location privacy. 
+
+In this section, I describe published work~\cite{Riederer:2013ila} that aims to reconcile the users' control over their location information with its commercial value.
+This approach raises three challenges:
+(1) The solution should be \emph{incrementally deployable}. 
+It must easily integrate with current devices and practices while giving all parties an incentive to participate.
+(2) The solution should be \emph{robust} against threats from its participants. 
+Advertisers should not be able to access data without compensating users or access more than the users specify. 
+Users should not be able to benefit from seeking unfair compensation.
+(3) The solution should be \emph{easy to use}. 
+The system should be easily understood by both users and advertisers.
+
+Our solution is based on selective disclosure; users decide what location information they want to disclose.
+At the heart of our solution is a \emph{keyword-based} method where keywords are associated with locations, and the decision to release locations is based on keywords. 
+We observe that keywords are naturally associated with the elements that define this problem, but also offer a strong abstraction to handle location data.  
+In order to drive the adoption of the solution, we propose providing economic compensation to the users for the location information they disclose. 
+Application and web service providers bid to gain \emph{access} to users at these specific locations in real-time. 
+
+\subsection{Overview}
+Our requirements calls for a solution to share information about location monetized by ad-networks and 3rd party aggregators through \emph{selective disclosure}. For the user to retain control, our privacy solution should address \emph{how} the information is released, under \emph{which conditions} the information is released and to \emph{whom}, as seen in previous ones, e.g.~Koi~\cite{guha:koi}, 
+
+% To meet our requirements, we create a solution based around \emph{selective disclosure}; users disclose location information that they are willing 
+% to release.
+% This information is monetized by ad-networks and third party aggregators by way of online ads. 
+% The control remains with the user. 
+% Any privacy solution based around selective disclosure 
+% needs to
+% address 
+% \emph{how} the information is released, under \emph{which conditions} the information is released and to \emph{whom}.
+
+To specify \emph{how} and \emph{under which conditions} location information is released, we choose to use keywords. 
+While the information that is released is a latitude longitude pair (lat-long), the decision to disclose is based on associated keywords. 
+Users who are comfortable disclosing location under certain circumstances~\cite{Kelley:2011} opt-in to reveal lat-long associated with keywords of their choices.
+%
+% In order to answer \emph{how} we release location information, we design our solution around keywords
+% associated with locations; the decision to release is based on keywords associated with locations, and
+% the information that is actually released is the location. %% IS IT THE LOCATION, OR THE KEYWORD?
+An example would be a street that has many restaurants serving different cuisines, it would have keywords like ``restaurant, Thai, French, Indian'' associated each with the lat-long of each particular venue. 
+The use of keywords brings important advantages: 
+(i) Keywords let us deal with the problem of location privacy at a higher abstraction than coordinates or even location descriptors as in Koi~\cite{guha:koi}. 
+(ii) Keywords are user friendly: instead of having to decide the sensitivity of every location, users decide on a much smaller set of keywords that they are comfortable releasing or not.
+(iii) Today's ad-networks function primarily around keywords, thereby a solution around keywords can make it easier for ad-networks to adopt and use.
+(iv) As there can be a finite set of keywords associated with any location, and the association of a keyword with a location typically remains for long periods of times, modifying keywords associated with a location is easy, making the solution scalable. 
+
+Our solution compensates users \emph{economically} for information they release to aggregators and ad-networks. Economic incentives can nudge more users towards adoption, as concerns about privacy alone are rarely sufficient. Concrete incentives also sometimes reduce users' cognitive biases when it comes to perceiving their privacy~\cite{loewenstein2010misplaced}. Specifying to \emph{whom} the information is released is implicitly done by a market. 
+%They also addresses the issue of to \emph{whom} the information will be released to -- parties that can pay. 
+In principle, any parties that can pay for it is legitimate. In practice, this agreement should be facilitated by a trusted third party who vet the parties and send information about the user \emph{only} for locations she agreed on, upon payment. 
+
+\begin{wrapfigure}{R}{0.5\textwidth}
+% \begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=0.9\linewidth]{fig/keyword/TLPOverview.pdf}
+  \end{center}
+  \caption{Solution overview}
+  \label{fig:overview}
+% \end{figure}
+\end{wrapfigure}
+The architecture consists of the following components: 
+(i) a keyword server which maps physical locations to keywords
+(ii) a location blacklist module which contains a list of sensitive keywords, 
+communicates with the keyword server, and reveals non-sensitive locations
+(iii) a blocking module in the network that blocks access to various parties, 
+% (ii) a blacklist module that contains a list of sensitive keywords and maps these
+% keywords to physical locations -- these are locations that will not be revealed, 
+(iv) a market that puts up for sale information about locations visited by the user that are not in the blacklist, 
+and (v) a module that grants \emph{access}
+to the user for parties that pay, after purchasing access on the market.
+With the exception of (ii), which can be a simple smartphone app, all modules are stored in the network; \emph{no} changes are required on the device.
+
+A high-level diagram is shown in Fig.~\ref{fig:overview}. 
+We describe the process with a simple example. 
+Alice is willing to share certain locations and would like to hide her presence at other locations, a typical occurrence~\cite{Kelley:2011}. 
+Alice wants to buy bread, shop for wine, and go to the Libertarian party headquarters. 
+She would like to conceal her political leanings.
+Alice would therefore put `Libertarian, Politics' as keywords in her \emph{blacklist module}. 
+We describe in Sec.~\ref{subsec:implementation} how the blacklist formation can be simplified through nested menus and re-ordering. 
+% This blacklist will be stored on a server at a third party location. 
+We assume the third party is trusted and leave lowering this requirement to future work.
+
+
+\subsection{Deployment and User Study}
+An implementation consists of the five components described in section~\ref{subsec:design}:
+a keyword server, a location blacklist module, a network blocking module, an information market, and an access module.
+
+% (i) a keyword server which maps keywords to physical locations
+Our \textbf{keyword server} used Yelp's API.  % TODO: cite Yelp
+Each time a device uploaded a lat-long to the server, we queried Yelp to find the categories of each location within 50 meters, using these categories as the location's keywords.
+The \textbf{location blacklist} module was written as an Android application. 
+The app was designed to give users a way to edit a blacklist and monitor which locations (and corresponding keywords) were being recorded. 
+We used Yelp's 885 categories as our keywords during the study, meaning users had a large number of potential keywords to blacklist.
+To make adding keywords to the blacklist manageable, all possible keywords were placed in a nested menu by category. 
+We placed categories previously defined to be sensitive~\cite{bing} near the top of this list, and alphabetized all potentially less sensitive categories.
+The blacklist was stored locally on the phone. 
+\emph{At no point did the authors have access to a study participant's blacklist.}
+Each half hour, the app would passively check the keywords in the current location and upload the location and keywords to the server only if no keywords were on the blacklist.
+For the purposes of our small scale user study, we did not create a \textbf{blocking module} or connect the system to any ad exchanges.
+
+\begin{wrapfigure}{R}{0.5\textwidth}
+% \begin{figure*}[!htb]
+% \minipage{0.32\textwidth}
+%   \centering
+%   \includegraphics[width=0.75\linewidth]{./fig/screenshot_blacklist.pdf}
+%   \caption{Blacklist}\label{fig:awesome_image1}
+% \endminipage\hfill
+\minipage{0.25\textwidth}
+  \centering
+  \includegraphics[width=0.75\linewidth]{fig/keyword/screenshot_addlist.pdf}
+%  \caption{Adding screen}\label{fig:awesome_image2}
+\endminipage\hfill
+\minipage{0.25\textwidth}
+  \centering
+  \includegraphics[width=0.75\linewidth]{fig/keyword/screenshot_map.pdf}
+%  \caption{Map}\label{fig:awesome_image3}
+\endminipage
+\caption{User Interface: (left) managing keywords black list, (right) visualizing locations released.}
+\end{wrapfigure}
+
+Instead of implementing a \textbf{market} or \textbf{access module}, we simulated the incentives and costs a user might experience while using our system. 
+In our deployment, all participants received \$10 for participating and were entered into a lottery.
+Each user was instructed that releasing more `valuable' information would give them a higher chance of the lottery.
+We did not disclose the exact method of valuing information, mimicking the opaque way in which information would be priced in a real implementation of the system. 
+The intention was that this would incentivize users to release more information.
+To protect users' safety, users could contact us at any point if they were concerned about an unintentional location release. 
+Additionally, any time a data point was recorded, we delayed making it public by 24 hours. 
+Users could see their data points in real-time via a password-secured link.
+
+We deployed our implementation with six users for two weeks. 
+Users were geographically diverse, located in multiple cities throughout the United States.
+Study participants were recruited through advertising on social networks and were primarily adults in their mid-twenties.
+
+After the study, we asked users to complete a survey. 
+Our study was too small to make general conclusions, but we present results here to inform future work. 
+Users easily understood both the keyword system and the interface. 
+Users were divided on how well they felt the system secured their privacy, with some users concerned that our mapping of keywords to locations was not precise enough. 
+Our users expressed a range of privacy sensitivities. 
+Some did not use the blacklist and others used the blacklist to hide sites they associated with social stigma or that they thought would send negative signals to employers, insurers, or the police.
+
+% Maybe attacks on privacy
+
+
+% \input{keyword-based/short-intro-new}
+% \input{keyword-based/short-overview-new} % Contains system description
+% \input{keyword-based/short-user-study} % Contains system description
+% \input{keyword-based/short-security}
+% \input{keyword-based/short-relwork}
+% \input{keyword-based/short-conclusion}
