@@ -41,7 +41,7 @@ Here we take this a step further, showing not only that this vulnerability exist
 Additionally, we provide a tool to users that aggregates and displays their location data along with the potential inferences made from it.
 
 \section{Economics}
-I focus on location data, privacy, and economics in \chap{sec:econ} and \chap{sec:keyword}.
+I focus on location data, privacy, and economics in \chap{sec:econ}.
 We begin with work that seeks to understand user attitudes to their privacy and the economic value of their information.
 Specifically, it examines an alternative to the current practice of firms offering free services in exchange for full control over user data.
 The alternative model is one in which users control their data and make decisions about when to sell access to their info, and to whom.
@@ -51,15 +51,28 @@ The alternative model is one in which users control their data and make decision
 % I Don’t Have a Photograph But You Can Have My Footprints
 % Under submission work on demographic labeling
 % Current work on bias!
-Finally, I analyze the interaction between location data and algorithmic bias in \chap{sec:bias}, \chap{sec:demo}, and \chap{sec:findyou}.
+Finally, I analyze the interaction between location data and algorithmic bias in \chap{chap:bias}.
 We gather a dataset of locations attached to demographic information from a popular image-sharing mobile application.
 This data allows us to study the differences in human mobility across different groups, and moreover, to show that demographics can be inferred using only location data.
 This raises questions about the sensitivity of location data, and about the potential for bias in systems that make decisions based on location data.
 We examine other methodologies for inferring demographics from social network data and discuss debiasing of algorithms.
 Furthermore, I demonstrate a personal auditing tool for users to understand their location data and the inferences potentially made about them.
 
-\chap{sec:proposal-i} links these works together in my proposal for future work.
-I discuss my plans to analyze real world algorithmic bias in a location-based advertising setting along with my current progress.
+\section{De-biasing Location Based Advertising}
+\chap{chap:proposal} links my previous works together in my proposal for future work.
+I hope to discover the conditions under which adveritisers may safely use location data to decide when to show ads without unfairly benefiting one demographic group at the cost of another.
+% This work will require an understanding of the 
+Advertisers (and other users of algorithms) often wish to target users based on certain traits (e.g. interest in a product).
+These users may be clustered geographically, for example, only users in New York will be interested in purchasing a subway pass for that city.
+While wishing to target, advertisers may also wish to \emph{not} exclude certain demographics due to issues of fairness (and potential bad publicity).
+Our New York City subway pass advertiser might not wish to offer more deals to the wealthy at the expense of the poor, for example.
+By using a large dataset of location data tagged with user generated text and demographic information, I will be able to determine the cost of altering a location-based advertising algorithm to insure that ads are shown to a representative population.
+A key metric will be demographic mobility, looking at how skewed from the overall distribution the make up of visits by certain demoagrphics are in a location.
+In locations where the difference in demographic mobility is small, advertisers can tweak their algorithms to show ads equally across demographics with minimal cost, fair to both individuals and overall groups.
+In other cases where the difference is large, the costs will likely be higher.
+I offer more detailed description of this planned work in \chap{chap:proposal}.
+
+% I discuss my plans to analyze real world algorithmic bias in a location-based advertising setting along with my current progress.
 
 % \chap{sec:proposal-ii}
 
