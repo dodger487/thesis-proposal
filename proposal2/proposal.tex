@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 \usepackage{graphics}
 \usepackage{epsfig}
@@ -96,46 +96,47 @@ Columbia University\\
 \cleardoublepage
 \pagenumbering{arabic}
 
-\section{Introduction}
+% \section{Introduction}
+\chapter{Introduction}
 \label{ch:intro}
 \input{introduction.tex}
+  \section{Background}
+  \label{sec:background}
+  \input{background.tex}
 
 
-\section{Background}
-\label{sec:background}
-\input{background.tex}
-
-
-\section{Location Data and Anonymity}
+\chapter{Location Data and Anonymity}
+% \section{Location Data and Anonymity}
 \label{sec:anon}
 \input{anon.tex}
 
 
-\section{Location Data, Privacy, and Economics}
+\chapter{Location Data, Privacy, and Economics}
+% \section{Location Data, Privacy, and Economics}
 \label{sec:econ}
 \input{econ.tex}
 
-
-\section{Location Data, Privacy, and Economics: \\User Choice in Location Disclosure}
+\section{User Choice in Location Disclosure}
+% \section{Location Data, Privacy, and Economics: \\User Choice in Location Disclosure}
 \label{sec:keyword}
 \input{keyword.tex}
 
-
-\section{Location Data, Demographics, and Bias: \\Demographic Mobility}
+\chapter{Location Data, Demographics, and Bias}
+\section{Demographic Mobility}
 \label{sec:bias}
 \input{bias.tex}
 
 
-
-\section{Location Data, Demographics, and Bias: \\Inferring Demographics from Social Media}
+\section{Inferring Demographics from Social Media}
 \label{sec:demo}
 \input{demo.tex}
 
 
-\section{Location Data, Demographics, and Bias:\\A Personal Auditing Tool}
+\section{A Personal Auditing Tool}
 \label{sec:findyou}
 \input{findyou.tex}
 
+\chapter{Proposals}
 
 \section{Proposal Topic I}
 \label{sec:proposal-i}
