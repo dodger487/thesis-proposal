@@ -9,5 +9,9 @@ all :
 quick : 
 	pdflatex proposal.tex
 
+quick2:
+	pdflatex proposal.tex
+	pdflatex proposal.tex
+
 clean :
 	rm *.aux *.bbl *.blg *.log *.toc *.out
