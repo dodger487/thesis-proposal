@@ -95,12 +95,12 @@ Gender NY & Log. Regression & L2, $C=0.1$ & Men's Store &   0.53  & \textbf{0.58
 % Make methodology as generic as possible.
 We now show how location data by itself allows to infer ethnicity and gender of individual Internet users.
 Our purpose is to explore generally what might be inferred about users from their location data only.
-This means we utilized only well-understood, and commonly applied techniques, and limited our feature sets to features derived from location data (ommitting, for example, social network features like number of followers).
+This means we utilized only well-understood, and commonly applied techniques, and limited our feature sets to features derived from location data (omitting, for example, social network features like number of followers).
 We considered two questions: (1) Can minorities be distinguished from Caucasians? (2) Can women be distinguished from men?
 
-To explore different scenarios, we respresented users as feature vectors, using three sets of features:
+To explore different scenarios, we represented users as feature vectors, using three sets of features:
 \textbf{geographic} features, such as counts or percentages of visits to locations; 
-\textbf{semantic} features derived from Foursquare, such as the popularity of visited venues or counts of visits to venues with certain categories like ``Restaurant" or ``Park" (the collection of which we explained in \S\ref{sec:method}); 
+\textbf{semantic} features derived from Foursquare, such as the popularity of visited venues or counts of visits to venues with certain categories like ``Restaurant" or ``Park".
 and \textbf{Census} derived features, such as the average ethnic makeup of all visited locations or the ethnic makeup of a user's most-visited location.
 
 We performed all our experiments using the scikit-learn library~\cite{scikit-learn} and tested the algorithms logistic regression, decision trees, naive Bayes, and support vector machines (SVMs). 
@@ -129,13 +129,13 @@ This corresponds to a problem scenario where locations are known but users are n
 % We called this the \textbf{Unsupervised Threshold} algorithm.
 In comparison, the \textbf{Supervised Threshold} algorithm learns a threshold via the labeled data, rather than using the city's mean, corresponding to a scenario where there are some labeled users and ``raw" or lightly anonymized location data that can be linked to the census.
 % We compared this algorithm to an algorithm with access to labeled data, which learned an optimal threshold rather than using one derived from publicly available Census data and which we dubbed the \textbf{Supervised Threshold} algorithm.
-The dashed lines in the graph correspond to our best performing algorithm and the basline.
+The dashed lines in the graph correspond to our best performing algorithm and the baseline.
 % Finally, we compared these algorithms against our best performing algorithm, run with all features at the lowest granularity. We call this the \textbf{Full} algorithm.
 
 A few interesting results can be derived from Figure~\ref{fig:big_plot}.
 Unsurprisingly, the performance of all algorithms decreases at the most coarse granularities. 
 However, the performance stays remarkably flat up to fairly large granularities, without a significant drop until after the PUMA level of roughly 100,000 people.
-Additionally, the performance of the Unsupervised Threshold algorithm, which uses \emph{no} labels, is not far from the other algorihtms.
+Additionally, the performance of the Unsupervised Threshold algorithm, which uses \emph{no} labels, is not far from the other algorithms.
 % This is most likely because the ethnicity distributions of larger regions are closer to the overall distribution of the metropolitan area and provide less information. 
 Several algorithms improve in performance at medium granularities, such as ZIP and neighborhood, most likely due to the sparsity of our dataset at the most detailed granularity levels.
 

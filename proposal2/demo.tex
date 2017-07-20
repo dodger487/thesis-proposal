@@ -57,12 +57,6 @@ There are many different ways to go from the ``raw" signal of social media to cl
 In this section, we consider three, with the relative comparison of the costs and benefits displayed in Table~\ref{tab:techniques}.
 \textbf{Manually} labeling profiles using humans to examine each one will result in the highest accuracy, but will have high monetary costs.
 Time for labeling can be moderate if done in parallel with many labels, and much slower if done serially by few individuals. 
-\textbf{Face recognition} can provide a valuable signal for gender or race based on image analysis.
-Depending on the implementation, this can be very cheap, as it is bounded by computation.
-However, face recognition algorithms are imperfect and may exhibit statistical bias towards different groups, and may be slow if bounded by API services or computation.
-Finally, using \textbf{location data}, as described in \chap{sec:bias}, can be incredibly fast and cheap, but will have low accuracy depending on prediction task, location granularity, and other factors.
-We next explore in detail the accuracy of each of these methods.
-For the sake of brevity, these results include only information on predicting US Census Race classifications, but we have additional work on binray gender classification available as well.
 
 % Location: Calibration plot and face to accuracy
 % Fig: confusion matrix
@@ -94,8 +88,17 @@ White & 5 & 88 \\
 % \end{figure}
 \end{wrapfigure}
 
+\textbf{Face recognition} can provide a valuable signal for gender or race based on image analysis.
+Depending on the implementation, this can be very cheap, as it is bounded by computation.
+However, face recognition algorithms are imperfect and may exhibit statistical bias towards different groups, and may be slow if bounded by API services or computation.
+Finally, using \textbf{location data}, as described in \chap{sec:bias}, can be incredibly fast and cheap, but will have low accuracy depending on prediction task, location granularity, and other factors.
+We next explore in detail the accuracy of each of these methods.
+For the sake of brevity, these results include only information on predicting US Census Race classifications, but we have additional work on binary gender classification available as well.
+
+
+
 Based on previous results, we expected location to provide more of a signal for race than for gender.
-Census tracts in the United States show a much more skewed distribution in regards to race than to gender, with the majority of tracts being heavily Caucasian, but with a sizeable fraction of tracts (>6\%) having smaller than 20\% Caucasian. 
+Census tracts in the United States show a much more skewed distribution in regards to race than to gender, with the majority of tracts being heavily Caucasian, but with a sizable fraction of tracts (>6\%) having smaller than 20\% Caucasian. 
 On a baseline of 70.4\% white users (including Hispanics), using the average percentage of census tracts visited predicted 73.4\% of users' races.
 Our figures show that there is some weak signal in terms of ROC.
 The algorithm is well calibrated but again does not make strong predictions on most users.
@@ -130,11 +133,11 @@ White & 4 & 97 \\
 % \end{figure}
 \end{wrapfigure}
 
-In Fig.~\ref{fig:accuracy_race_face}, we see that the algorithm is underconfident, outputting a lower probability than warranted when predicting if a user is white.
+In Fig.~\ref{fig:accuracy_race_face}, we see that the algorithm is under-confident, outputting a lower probability than warranted when predicting if a user is white.
 An important aspect of demographic labeling is considering issues of the digital divide or disparate impact.
 In the rightmost plot of Fig.~\ref{fig:accuracy_race_face}, we see that accuracy is much lower on minorities than it is on White users.
 Errors seem biased towards underrepresentation of minority groups.
-This could have consequences as the algorithmics introduce a hegemonic factor in favor the majority.
+This could have consequences as the algorithms introduce a hegemonic factor in favor the majority.
 % In section~\ref{sec:scaling} we discuss a principled technique for maintaining equal accuracy rates across groups while maintaining high overall accuracy.
 
 % Scaling: Agreement plot
@@ -209,7 +212,7 @@ $\frac{1}{2}\epsilon_1 + \frac{1}{2}\epsilon_2$, where $\epsilon_1$ and $\epsilo
 % Interpret results
 Figure~\ref{fig:debias} shows how accuracy scales with more data for race when using a threshold determined by optimal BER. 
 The thresholds were 0.58 for faces and 0.67 for location.
-Comparing with Figures~\ref{fig:faces_v_accuracy_race_labeled} and~\ref{fig:locs_v_accuracy_race_labeled_1}, we see lines much closer together, indicating error rates much closer to one another than previously.
+Comparing with Figures~\ref{fig:accuracy_race_loc} and~\ref{fig:accuracy_race_face}, we see lines much closer together, indicating error rates much closer to one another than previously.
 Choosing another metric, such as F1, indeed leads to problems in the example of location.
 Here, a threshold of 0.33 is chosen.
 Although this gives an accuracy of 100\% for White, it affords only 10.3\% accuracy for minorities.

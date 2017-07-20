@@ -2,32 +2,169 @@
 % Recent work has been more about theory, less about real data analysis
 % I have a cool new dataset that allows me to do data analysis
 
-As described in \chap{sec:bias}, an important challenge facing the computer science community is algorithmic bias.
+As described in \chap{chap:bias}, an important challenge facing the computer science community is algorithmic bias.
 In recent years, an emerging body of work has focused on different mitigating techniques, 
-  such as automated discovery of bias, ``de-biasing" existing algorithms, or theoretical analyses of differnet types of bias.
+  such as automated discovery of bias, ``de-biasing" existing algorithms, or theoretical analyses of different types of bias.
 De-biasing techniques are sure to incur a cost: the objective function of the algorithm is no longer as straightforward, and organizationally new infrastructure needs to be put into place for something that could hurt revenue.
 Understanding the key trade-offs between revenue and uncertain risk will be important to insure real-world adoption.
 Although there have been some good initial insights, the community has lacked strong data-driven analysis on this trade off.
 
 I propose to fill this gap by applying proposed techniques to real-world problems through the use of an innovative dataset.
-Namely, I will look at the real-world problems of recommendation systems within a large social network.
-I will examine the trade off between recommendation accuracy, bias, and revenue.
-
-Over the course of several months I have gathered photo metadata from the popular image-sharing application Instagram.
-I have run these photos through a program that recognizes faces within each image, tagging it with age, gender, and ethnicity.
-This will create the largest publicly available dataset that I know of connecting human mobility to demographics.
-
-Machine learning systems utilize location in making recommendations.
-However, location can be highly correlated with potentially sensitive traits, such as ethnicity.
-I plan to look at 
+Namely, I will look at the real-world problems of recommendation systems within a large social network, focusing on location-based advertising.
+As locations are an important signal in user intent and demographics, they are a useful system for advertising.
+By the same token, since locations are tied to demographics, an automated advertising system based on advertising may become biased against certain groups (inadvertently or otherwise). 
+An example unfair outcome is if certain racial groups or genders are not offered deals or benefits at the same rate as others due simply to their location.
 
 
-The project will emerge in several stages.
-\begin{enumerate}
-  \item Collection of instagram data (completed).
-  \item Labeling of instagram data with Face++ API (completed).
-  \item Initial analysis and descriptive statistics of dataset (in progress).
-  \item Full problem specificiation: algorithms, inputs, and objectives.
-  \item Apply de-biasing to algorithms and analyze impacts.
-  \item Create recommendations for algorithm designers.
-\end{enumerate}
+\section{Background}
+Algorithmic bias has been studied in many contexts.
+The common idea is that algorithms are not completely neutral and objective arbiters of decisions, but rather are simple tools, the incautious use of which can lead to harm falling disproportionately on already vulnerable groups.
+A prototypical example was the discovery of a chain that altered its online prices based on the buyer's home locations, possibly in an attempt to give discounts to users living near competitors.
+However, living near competitors correlates with income, in effect raising prices for lower income buyers~\cite{ValentinoDevries:2012vv, Anonymous:2012wi}.
+Work in the popular press has found other cases, such as differing types of errors across race in algorithms designed to help with bail sentencing~\cite{propublica:bias} and higher car insurance rates for minorities compared to whites living in areas with the same level of risk~\cite{propublica:cars}.
+%TODO \cite{kleinberg2016inherent}
+Other cases of bias have been caused by training algorithms on data that already contain human biases, for example word embeddings that associate doctors with men and women with nurses~\cite{bolukbasi2016man, caliskan2016semantics}.
+Researchers have attempted to mitigate these issues by finding and subtracting dimensions that correspond to gender.
+
+
+% KDD Tutorial sources.
+% Dwork.~\cite{dwork2012fairness}
+
+A variety of methods have been proposed to automatically remove bias from machine learning algorithms.
+One example attempts to learn the protected class of individuals in parallel to the original machine learning task, altering the data to be less distinguishable to the demographic differentiator while still minimizing the original loss function~\cite{feldman2015certifying}
+
+My plan is to utilize the algorithm in ``Fairness Through Awareness"~\cite{dwork2012fairness}.
+The proposal of this algorithm is that some fair arbiter decides on a similarity scoring function which will be applied between users.
+It adds constraints to an algorithm that users similar on the similarity scoring function metric must have similar outcomes.
+The scheme creates a linear program with constraints polynomial to the number of users and outcomes, making it practical to implement.
+Indeed, I have already run this scheme on toy examples and do not anticipate large difficulties on more complicated versions of the problem.
+
+More rigorously, "Fairness Through Awareness" has the algorithm designer solve the following linear program:
+\begin{align*}
+\text{min} \quad
+&\mathbf{E}_{x \sim V} \mathbf{E}_{a \sim \mu_x} L(x,a) \\
+\text{subject to} \quad
+&\forall x, y \in V : D(\mu_x, \mu_y) \leq d(x, y) \\
+&\forall x \in V : \mu_x \in \Delta(A) 
+% x &\geq 0
+\end{align*}
+where 
+\begin{itemize}
+  \item $V$ is the set of all representations of users
+  \item $A$ is the set of outcomes (e.g. the ads to show users)
+  \item $\mu_x$ a distribution for user $x$ over the outcomes $A$
+  \item $L$ is the loss function we are trying to minimize (such as negative revenue)
+  \item $D$ is a distance function between distributions, such as total variation or $l_{\inf}$
+  \item $d$ is a distance function between representations of users
+\end{itemize}
+
+Intuitively, this linear program tries to minimize loss while showing assigning a similar distribution of potential ads to show to similar users.
+I believe this framework allows for a high level of flexibility for the algorithm designer while still using an intuitive and effective notion of fairness.
+% More rigorous detailing of Dwork!
+
+% To test this algorithm on ``real world" data, over the course of several months I have gathered photo metadata from the popular image-sharing application Instagram.
+% I have run these photos through a program that recognizes faces within each image, tagging it with age, gender, and ethnicity.
+% This will create the largest publicly available dataset that I know of connecting human mobility to demographics.
+
+% Machine learning systems utilize location in making recommendations.
+% However, location can be highly correlated with potentially sensitive traits, such as ethnicity.
+% I plan to look at 
+
+
+\section{Research Plan}
+Much of the previous work has either focused on detecting bias.
+Researchers build tools for auditing advertisers, pointing out cases where algorithms have lead to undesirable results.
+Additionally, many works have used small and limited datasets or included no data-driven analysis at all.
+I propose to fill this gap by applying proposed techniques to real-world problems through the use of an large and innovative dataset, focusing on a practical and important application: location-based advertising.
+As locations are an important signal in user intent and demographics, they are a useful system for advertising.
+By the same token, since locations are tied to demographics, an automated advertising system based on advertising may become biased against certain groups (inadvertently or otherwise). 
+An example unfair outcome is if certain racial groups or genders are not deals or benefits at the same rate as others due simply to their location.
+
+At a high level, I plan to first model a location-based advertising system using a large amount of metadata collected from a location-based social network.
+This data will include user profiles of visited locations, as well as social network information such as text and 
+Demographics of profiles will be determined based on the face recognition system described in~\chap{sec:demo}.
+We will simulate advertising by predicting when users take a particular action, using that as a proxy for a click, associating a revenue with that action commensurate with a cost-per-click (CPC).
+This model will give us an objective function which we can then try to maximize in the setting of Dwork's de-biasing algorithm.
+We can use a variety of similarity functions, such as earth mover distance between the histogram of locations visited by a user.
+This will let us see when statistical parity can be achieved between various demographic groups based on their mobility.
+We can additionally experiment with other similarity functions, looking for the interaction between revenue loss and increased fairness.
+
+The project will be conducted in several steps.
+
+\begin{table}[h]
+\begin{small}
+\begin{center}
+\begin{tabular}{lll}
+Task & Status & Time line \\
+\hline
+Collection of data. & Completed & Aug '16 \\
+Labeling of data with Face++ API. & Completed & Aug '16 \\
+Initial analysis and descriptive statistics of dataset & In progress & Start May '17 \\
+Full problem specification: algorithms, inputs, and objectives. & In progress & Mid May '17\\
+Apply de-biasing to algorithms and analyze impacts. & To do & Early June '17\\
+Create recommendations for algorithm designers. & To do & Mid June '17\\
+\end{tabular}
+\end{center}
+\end{small}
+\caption{Plan for completion of my research}
+\label{tab:plan}
+\end{table}
+
+
+\paragraph{Data.}
+I plan to use a dataset collected from the popular image sharing service Instagram.
+Currently, I have metadata for over 115M public photos for 260,000 users, collected via Instagram's API.
+16 million of these photos have location data, comprising 162,000 users from 180 different countries.
+I have applied Face++'s face recognition API on 2 million photos for over 6000 users, obtaining  gender and ethnicity data on 844,000 faces.
+Based on the labeling schemes described in my previous work, I believe 3,375 of these users are female and 2,859 are male, with 5,027 Caucasian and 1,207 non-Caucasian.
+
+\paragraph{Problem description.}
+I have several different ideas for problem scenarios.
+One is \emph{tag prediction}.
+Instagram users put ``tags" on their photos to indicate the category.
+These tags could be used to indicate interest-- for example, a user that may be interested in a coupon for a fast food restaurant may tag a photo ``\#burgers".
+I plan to categorize tags based on some affiliation with demographics and with locations.
+The model advertising scenario will be a predictive model of tags (or category of tags) based on mobile behaviors.
+Given the time, location, and user profile of a photo, we will predict what tag a user might use.
+If a user does indeed use that tag in that photo, we will record that as a click on an a.
+We can associate tags to a monetary value by looking at current CPCs on Google AdWords or another online advertising service.
+
+Another idea problem scenario could be \emph{trip prediction}.
+An advertiser may wish to target users who are likely to buy a plane ticket or other expensive travel-related item.
+There may be some signal in previous trips or checkins at airports, hotels, or other travel-related locations.
+The goal is to predict who will travel in a future time period based on current behaviors.
+The idea is then to de-bias this prediction scheme to insure fairness in showing deals across demographic groups.
+
+\paragraph{User representations and similarity measures.}
+
+A nice property of the earth mover distance as a user distance measure, is that if the user distance score is less than 1 for all pairs, a measure of bias between two groups will in fact be equal to the earth mover distance between the expected representation of two users sampled from each demographic group.
+Other user similarity/distance functions can also be applied, and I will investigate several distribution distance functions.
+
+\section{Current Results}
+
+The next major step in this work is developing the computational advertising model.
+As mentioned above, I am proposing two different formulations of the model: (1) predicting tags and (2) predicting large (out of state or country) trips.
+Due to the massive number of tags (over 645 million tags on the 115 million photos), it will be necessary to find a subset of tags that are predictable from location and have a high potential to be shown to one demographic but not another.
+
+\paragraph{Demographic-affiliated tags.}
+Utilizing my set of users labeled with demographics from the face recognition, I was able to associate some tags with each demographic.
+I then used a $\chi^2$ test to find tags most associated with one demographic (using a one vs many approach).
+This yielded the following results:
+\paragraph{Tags associated with female profiles:} "makeup", "nails", "dress", "lipstick", "sisters", "pink", "girls", "nailpolish", "nailart", "lips", "bikini", "brunette", "ootd", "yummy", "hair", "nail", "bff", "mylove", "chocolate", "girly".
+\paragraph{Tags associated with male profiles:} "beard", "hiphop", "gay", "dj", "muscle", "guy", "skate", "dope", "man", "brasil", "vinyl", "brazil", "cars", "bike", "building", "jj", "tour", "graffiti", "brooklyn", "urban", "instagay", "gayboy", "bodybuilder".
+\paragraph{Tags associated with Asian profiles:} "indonesia", "japan", "singapore", "korea", "thailand", "tokyo", "bangkok", "bali", "asian", "hongkong", "japanese", "beach", "sea", "cafe", "dog", "cat", "sunset", "coffee", "sky","flower"
+\paragraph{Tags associated with Black profiles:} "wcw", "tbt", "truth", "hiphop", "dope", "blessed", "god", "repost", "motivation", "nofilter", "goals", "faith", "beautiful", "inspiration", "art", "nyc", "friends", "picoftheday", "fall", "eyes"
+\paragraph{Tags associated with White profiles:} "summer", "winter", "sun", "spring", "autumn", "snow", "clouds", "flowers", "italy", "nature", "mountains", "relax", "blonde", "puppy", "streetart", "water", "lake", "blackandwhite", "summertime", "sunglasses"
+
+\paragraph{Location-affiliated tags.}
+The next step in the process is to find tags that are likely to be predictable from location.
+A variety of statistical measures have been proposed to understand the relationship between some variable and geographic.
+Specifically, spatial autocorrelation is typically used, with a measure such as Moran's I or Geary's C.
+A key issue that we encountered is a level of granularity.
+In the United States, populations (especially the Instagram using population) is clustered in few areas, areas with large cities.
+Thus, it is more important to find areas with a high concentration of tags, as opposed to finding tags that are in neighboring geographies.
+Therefore the simple measure of $L_2$ norm may be a suitable choice.
+
+\paragraph{Next steps.}
+The next steps in this project will be to find the most useful representation for location of users, create the advertising model (and evaluate its efficacy), and inspect the relationship between fairness and revenue.
+

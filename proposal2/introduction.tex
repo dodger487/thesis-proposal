@@ -36,7 +36,7 @@ I will begin with a background section which introduces the core concepts found 
 % Linking Users Across Domains with Location Data
 % FindYou
 \chap{sec:anon} examines the possibility of anonymizing location data. %TODO: edit
-Prior work has shown that users are highly unique in their location patterns, leaving them vulnerable to de-anonymization (see~\ref{sec:privacy}).
+Prior work has shown that users are highly unique in their location patterns, leaving them vulnerable to de-anonymization.
 Here we take this a step further, showing not only that this vulnerability exists, but that users indeed can be linked to other datasets.
 Additionally, we provide a tool to users that aggregates and displays their location data along with the potential inferences made from it.
 
@@ -55,19 +55,19 @@ Finally, I analyze the interaction between location data and algorithmic bias in
 We gather a dataset of locations attached to demographic information from a popular image-sharing mobile application.
 This data allows us to study the differences in human mobility across different groups, and moreover, to show that demographics can be inferred using only location data.
 This raises questions about the sensitivity of location data, and about the potential for bias in systems that make decisions based on location data.
-We examine other methodologies for inferring demographics from social network data and discuss debiasing of algorithms.
+We examine other methodologies for inferring demographics from social network data and discuss de-biasing of algorithms.
 Furthermore, I demonstrate a personal auditing tool for users to understand their location data and the inferences potentially made about them.
 
 \section{De-biasing Location Based Advertising}
 \chap{chap:proposal} links my previous works together in my proposal for future work.
-I hope to discover the conditions under which adveritisers may safely use location data to decide when to show ads without unfairly benefiting one demographic group at the cost of another.
+I hope to discover the conditions under which advertisers may safely use location data to decide when to show ads without unfairly benefiting one demographic group at the cost of another.
 % This work will require an understanding of the 
 Advertisers (and other users of algorithms) often wish to target users based on certain traits (e.g. interest in a product).
 These users may be clustered geographically, for example, only users in New York will be interested in purchasing a subway pass for that city.
 While wishing to target, advertisers may also wish to \emph{not} exclude certain demographics due to issues of fairness (and potential bad publicity).
 Our New York City subway pass advertiser might not wish to offer more deals to the wealthy at the expense of the poor, for example.
 By using a large dataset of location data tagged with user generated text and demographic information, I will be able to determine the cost of altering a location-based advertising algorithm to insure that ads are shown to a representative population.
-A key metric will be demographic mobility, looking at how skewed from the overall distribution the make up of visits by certain demoagrphics are in a location.
+A key metric will be demographic mobility, looking at how skewed from the overall distribution the make up of visits by certain demographics are in a location.
 In locations where the difference in demographic mobility is small, advertisers can tweak their algorithms to show ads equally across demographics with minimal cost, fair to both individuals and overall groups.
 In other cases where the difference is large, the costs will likely be higher.
 I offer more detailed description of this planned work in \chap{chap:proposal}.

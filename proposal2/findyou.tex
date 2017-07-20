@@ -1,6 +1,6 @@
 % Transition
 In this thesis, we show how demographics can be inferred from location data, but many users are not aware of the privacy implication of the collection of their information.
-This section shows a tool that we created in order to inform users, regardless of technical skill, about what their location information can reveal. 
+This section, which appeared WWW in 2016~\cite{riederer2016findyou}, shows a tool that we created in order to inform users, regardless of technical skill, about what their location information can reveal. 
 % The second goal is to improve research on demographics and mobility by gathering a new dataset with the informed consent of interested users.
 We will begin with a summary of a typical use of our tool ``FindYou", and proceed to explain each component in more detail, along with the decision-making that influenced the design. 
 
@@ -24,7 +24,7 @@ We will begin with a summary of a typical use of our tool ``FindYou", and procee
 %   % \label{fig:home-detail}
 
   \includegraphics[width=\linewidth]{fig/findyou/race.png}
-  \caption{Screenshots from the site, displaying (top to bottom) options for linking to data sources, a map showing the users's data, and predictions about home location and demographic, with prediction details.}
+  \caption{Screenshots from the site, displaying (top to bottom) options for linking to data sources, a map showing the users' data, and predictions about home location and demographic, with prediction details.}
   \label{fig:findyou_screencap}
 \end{wrapfigure}
 
@@ -97,7 +97,7 @@ We chose to represent all locations as a census tract for several reasons.
 First, we can map any latitude longitude point into a census tract, and thus any venue with an associated lat-lon into a tract as well.
 Census tracts are small enough to be targeted, but large enough to display without overwhelming the user.
 Finally, they are all associated with detailed demographic information from the Census.
-Throughout the site, whenever a census tract is mentioned, the user can click on it to see its geographic bounadires and demographic make-up.
+Throughout the site, whenever a census tract is mentioned, the user can click on it to see its geographic boundaries and demographic make-up.
 
 %TODO(cjr): add conclusion to FindYou?
 

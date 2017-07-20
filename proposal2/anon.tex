@@ -36,7 +36,7 @@ A figure detailing this result and results for other granularities and values of
 The authors went on to analyze the impact of geography (comparing different states and cities), mobility (distances between top locations), and social networks on anonymity.
 
 A different study used randomly selected points from a user's dataset and included time of location visit~\cite{de2013unique}, as opposed to a users top $n$ locations (mostly omitting precise time) of Zang and Bolot.
-Using a call detail record dataset of 1.5 million users from a small European country, this work showed that 95\% of users are uniquely identified by 4 spatio-temporal points.
+Using a call detail record dataset of 1.5 million users from a small European country, this work showed that 95\% of users are uniquely identified by 4 spatiotemporal points.
 % TODO: add figure?
 A follow up study~\cite{de2015unique} showed that in a data set of credit card transactions, user profiles of spatiotemporal points had a similar level of uniqueness, and even more when transaction amounts were included as well.
 
@@ -50,14 +50,14 @@ For example, much of cryptography relies on creating unique but unpredictable se
 If, quite hypothetically, humans decided where to go next by rolling this die, their movements would look very unique.
 However, since the movements are random and unpredictable, my movements from different time periods will be indistinguishable from those of a different individual.
 
-TODO: put some math here?
+% TODO: put some math here?
 
-Another possibile break in the argument that uniqueness implies vulnerability is the important factor of sampling.
+Another possible break in the argument that uniqueness implies vulnerability is the important factor of sampling.
 The datasets dealt with here (phone records, social media posts) are all \emph{actively} collected: each data point exists if and only if the user has taken an action.
 Intuitively, the location data from different sampling data sources should look very different.
 An individual may be more likely to make phone calls in quiet places, like the home or office, and take geotagged location photos in popular tourist destinations or restaurants.
 
-TODO: put some math here?
+% TODO: put some math here?
 
 The vector of attack implied in the above-mentioned works are having access to an original, anonymized dataset, and then de-anonymizing it with a subset of auxiliary information with columns identical to the original set.
 In ``Linking Users Across Domains with Location Data", published at WWW in 2016~\cite{riederer2016linking}, we tackled the problem of linking users across two entirely different datasets using only their location data.
@@ -81,11 +81,11 @@ We denoted $\sigma_I$ to be a true (``identity'') mapping that correctly links t
 The goal then, of this work, is to recover $\sigma_I$.
     
 We made a series of simple assumptions about human mobility.
-We broke time into discrete ``bins" of a certain length, and then declared the number of checkins a user has at each location in time bin to be Poisson distributed according to a rate paramater $\lambda$ unique to that time and place.
+We broke time into discrete ``bins" of a certain length, and then declared the number of checkins a user has at each location in time bin to be Poisson distributed according to a rate parameter $\lambda$ unique to that time and place.
 This is a simple but reasonable assumption, and Poisson distributions are often used to model rare events (like checkins).
 
 This model generates the \emph{real world} mobility of a user.
-We assume that this real world mobility is sampled independentally and randomly for the two different data sets with probability $p_U$ and $p_V$.
+We assume that this real world mobility is sampled independently and randomly for the two different data sets with probability $p_U$ and $p_V$.
 
 \fig{fig:linking_explain} provides a visual illustration.
 On the left side of the image are two real world trajectories, denoted with a blue and turquoise line.
@@ -166,8 +166,11 @@ Statistics about these datasets is summarized in Table~\ref{tab:link-data}.
 \end{figure*}
 
 We now turn our attention to experimental performances of our algorithm. 
-In Figure~\ref{fig:link-prec-recall}, we show the precision recall plots for our algorithm (for different eccentricity values) and for the other three reconciliation techniques: HIST, NFLX and WYCI. 
-For our algorithm, we used estimated parameters and  for the other techniques, we used optimal parameters (found via exhaustive search).
+In Figure~\ref{fig:link-prec-recall}, we show the precision recall plots for our algorithm (for different eccentricity values) and for the other three reconciliation techniques: HIST, NFLX and WYCI, which are, respectively,
+the histogram matching technique of~\cite{Unnikrishnan:2013fc},
+the "Netflix De-Anonymization Attack"~\cite{Narayanan:2008iu},
+and a frequency-based maximum likelihood estimator~\cite{Rossi:2014eh}. 
+For our algorithm, we used estimated parameters and for the other techniques, we used optimal parameters (found via exhaustive search).
 
 There are several interesting observations that we can make on Figure~\ref{fig:link-prec-recall}. 
 First, on the public dataset FQ-TWT our algorithm outperforms all prior methods (especially in precision). 
